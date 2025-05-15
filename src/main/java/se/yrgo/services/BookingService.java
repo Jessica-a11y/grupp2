@@ -12,12 +12,14 @@ public interface BookingService {
     List<Table> getAllTables();
     void addReservation(Reservation reservation);
     List<Reservation> getAllReservations();
+    List<Table> getAllAvailableTables();
+     //Get all reservations for a certain table: List<Reservation>
+    List<Reservation> allReservationsForTable(Table table);
+    //Get all reservated tables for a certain customer: List<Table>
+    List<Table> allReservatedTablesForCustomer(String customerID);
 
-    //Vad skulle vi vilja gör 
- 
-    //få alla lediga bord: List<Table>
     //Få fram lediga tider: List<LocalDateTime>
 
-    //få alla bokade bord från en viss person: List<Table>
-    //få alla reservationer för ett vist bord List<Reservation>
+    
+   
 }

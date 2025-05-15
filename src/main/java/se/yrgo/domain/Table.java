@@ -26,4 +26,9 @@ public class Table {
     public Boolean getAvailable() {
         return available;
     }
+
+    @Override
+    public String toString(){ 
+        return String.format("Table number: %s - Amount of seats: %s - Available: %b", tableNumber, amountOfSeats, available);
+    }
 }

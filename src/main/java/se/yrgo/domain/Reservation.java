@@ -36,5 +36,11 @@ public class Reservation{
 
     public LocalTime getReservationTime() {
         return reservationTime;
-    }  
-}
+    } 
+
+    @Override
+    public String toString(){ 
+        return "Reservation ID: "+reservationId +" - Table ID: " + tableId + " - Customer ID: " + customerId + " - Reservation Date: " + reservationDate + " - Reservation Time: " + reservationTime;
+    }
+   
+} 
