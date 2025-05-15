@@ -22,6 +22,9 @@ public class Customer {
     public String getTelephone() {
         return telephone;
     }
+    //Har skapat en map services jag tänker skapa ett interface
+    //Tanken är att den ska ha alla de funktioner som vi skulle villja ha i vår meny. Typ boka ett bord/ redigera bokning/
+    // 
+}//Gå in i Bookingservi
 
-    
-}
+//Yes!
