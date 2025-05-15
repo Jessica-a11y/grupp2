@@ -1,11 +1,20 @@
 package se.yrgo.services;
 
+import java.util.List;
+
+import se.yrgo.domain.*;
+
 public interface BookingService {
 
+    void addCustomer(Customer customer);
+    List<Customer> getAllCustomers();
+    void addTable(Table table);
+    List<Table> getAllTables();
+    void addReservation(Reservation reservation);
+    List<Reservation> getAllReservations();
+
     //Vad skulle vi vilja gör 
-    //Förslag:
-    //Boka bord: void
-    //få alla bokade bord: List<Table>
+ 
     //få alla lediga bord: List<Table>
     //Få fram lediga tider: List<LocalDateTime>
 

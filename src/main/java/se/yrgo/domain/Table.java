@@ -5,18 +5,14 @@ public class Table {
     private int amountOfSeats;
     private Boolean available;
 
-    public Table(int tableNumber, int amountOfSeats) {
+    public Table(int tableNumber, int amountOfSeats, Boolean available) {
         this.tableNumber = tableNumber;
         this.amountOfSeats = amountOfSeats;
-        this.available = true; 
+        this.available = available; 
     }
 
     public void tableNotAvailable() {
         this.available = false;
-    }
-
-    public void setAvailable(Boolean available) {
-        this.available = available;
     }
 
     public int getTableNumber() {

@@ -1,7 +1,6 @@
 package se.yrgo.domain;
 
 import java.time.*;
-import java.util.*;
 
 public class Reservation{
     private String reservationId;

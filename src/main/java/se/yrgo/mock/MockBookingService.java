@@ -11,13 +11,13 @@ public class MockBookingService {
     private Map<Integer, Table> tables = new HashMap<>();
 
     public MockBookingService() {
-        tables.put(1, new Table(1, 4));
-        tables.put(2, new Table(2, 2));
-        tables.put(3, new Table(3, 6));
+        tables.put(1, new Table(1, 4, false));
+        tables.put(2, new Table(2, 2, true));
+        tables.put(3, new Table(3, 6, true));
 
         //Adding some customers
-        customers.put("1", new Customer("Anna Andersson", "anna@gmail.com", "0701234567"));
-        customers.put("2", new Customer("Bertil Bengtsson", "bertil@gmail.com", "0709876543"));
+        customers.put("1", new Customer("1", "Anna Andersson", "anna@gmail.com", "0701234567"));
+        customers.put("2", new Customer("2","Bertil Bengtsson", "bertil@gmail.com", "0709876543"));
 
         //Adding some bookings
         reservations.put("r1", new Reservation(
@@ -27,40 +27,25 @@ public class MockBookingService {
         ));
     }
 
-    public Customer addCustomer(String name, String email, String telephone) {
-        String id = UUID.randomUUID().toString();
-        Customer customer = new Customer(name, email, telephone);
-        customers.put(id, customer);
-        return customer;
+    public void addCustomer(Customer customer) {
+        customers.put(customer.getCustomerID(), customer);
     }
 
     public List<Customer> getAllCustomers() {
         return new ArrayList<>(customers.values());
     }
 
-    public Table addTable(int tableNumber, int amountOfSeats) {
-        Table table = new Table(tableNumber, amountOfSeats);
-        tables.put(tableNumber, table);
-        return table;
+    public void addTable(Table table) {
+        tables.put(table.getTableNumber(), table);
     }
 
     public List<Table> getAllTables() {
         return new ArrayList<>(tables.values());
     }
 
-    public Reservation addReservation(String tableId, String customerId, LocalDate date, LocalTime time) {
+    public void addReservation(Reservation reservation) {
         String reservationId = UUID.randomUUID().toString();
-        Reservation reservation = new Reservation(reservationId, tableId, customerId, date, time);
         reservations.put(reservationId, reservation);
-
-        //Mark table as booked
-        Table table = tables.get(Integer.parseInt(tableId));
-
-        if (table != null) {
-            table.tableNotAvailable();
-        }
-
-        return reservation;
     }
 
     public List<Reservation> getAllReservations() {
@@ -68,16 +53,7 @@ public class MockBookingService {
     }
 
     //Delete a booking
-    public void removeReservation(String reservationId) {
-        Reservation reservation = reservations.remove(reservationId);
-
-        if (reservation != null) {
-            //Mark table as avaliable again
-            Table table = tables.get(Integer.parseInt(reservation.getTableId()));
-
-            if (table != null) {
-                table.setAvailable(true);
-            }
-        }
+    public void removeReservation(Reservation reservation) {
+        reservations.remove(reservation.getReservationId());
     }
 }

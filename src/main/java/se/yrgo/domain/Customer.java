@@ -1,14 +1,20 @@
 package se.yrgo.domain;
 
 public class Customer {
+    private String customerID;
     private String name;
     private String email;
     private String telephone;
 
-    public Customer(String name, String email, String telephone) {
+    public Customer(String customerID, String name, String email, String telephone) {
+        this.customerID = customerID;
         this.name = name;
         this.email = email;
         this.telephone = telephone;
+    }
+
+    public String getCustomerID() {
+        return customerID;
     }
 
     public String getName() {
