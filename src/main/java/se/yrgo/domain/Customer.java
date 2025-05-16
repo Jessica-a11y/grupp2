@@ -1,5 +1,7 @@
 package se.yrgo.domain;
-
+/**
+ * Auhtor Jessica Olofsson
+ */
 public class Customer {
     private String customerID;
     private String name;

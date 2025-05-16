@@ -8,7 +8,10 @@ import se.yrgo.domain.*;
 public class Client {
     public static void main(String[] args) {
         BookingService service = new MockBookingService(); 
-        List<Table> tables = service.allReservatedTablesForCustomer("1"); 
+        List<Reservation> reservations = service.allReservationsForCustomer("1"); 
+        for (Reservation r : reservations) {
+            System.out.println(r.toString());
+        }
 
         
     } 

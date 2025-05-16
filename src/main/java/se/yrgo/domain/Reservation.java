@@ -1,6 +1,9 @@
 package se.yrgo.domain;
 
 import java.time.*;
+/**
+ * Author Daniel Grahn
+ */
 
 public class Reservation{
     private String reservationId;

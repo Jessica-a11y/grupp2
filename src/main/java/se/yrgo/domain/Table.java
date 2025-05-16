@@ -1,5 +1,7 @@
 package se.yrgo.domain;
-
+/**
+ * Author Daniel Grahn 
+ */
 public class Table {
     private int tableNumber;
     private int amountOfSeats;

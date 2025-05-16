@@ -4,13 +4,14 @@ import se.yrgo.domain.*;
 import se.yrgo.services.BookingService;
 import java.time.*;
 import java.util.*;
-
+/**
+ * Author Emilia Jarleback
+ */
 public class MockBookingService implements BookingService{ 
     private Map<String, Customer> customers = new HashMap<>(); 
     private Map<String, Reservation> reservations = new HashMap<>();
     private Map<Integer, Table> tables = new HashMap<>();
-    
-// Kommer strax tillbaka, ska in och söva
+
     public MockBookingService() {
         tables.put(1, new Table(1, 4, false));
         tables.put(2, new Table(2, 2, true));
@@ -28,7 +29,7 @@ public class MockBookingService implements BookingService{
             LocalTime.of(18, 0)
         ));
     }
-
+    
     public void addCustomer(Customer customer) {
         customers.put(customer.getCustomerID(), customer);
     }
@@ -75,7 +76,7 @@ public class MockBookingService implements BookingService{
     }
 
     @Override
-    public List<Reservation> allReservatedTablesForCustomer(String customerID) {
+    public List<Reservation> allReservationsForCustomer(String customerID) {
         List<Reservation> res = new ArrayList<>();
         for(Reservation r : reservations.values()) {
             if(r.getCustomerId() == customerID) {

@@ -3,7 +3,9 @@ package se.yrgo.services;
 import java.util.List;
 
 import se.yrgo.domain.*;
-
+/**
+ * Author Daniel Grahn, Jessica Olofsson
+ */
 public interface BookingService {
 
     void addCustomer(Customer customer);
@@ -15,8 +17,8 @@ public interface BookingService {
     List<Table> getAllAvailableTables();
      //Get all reservations for a certain table: List<Reservation>
     List<Reservation> allReservationsForTable(Table table);
-    //Get all reservated tables for a certain customer: List<Table>
-    List<Table> allReservatedTablesForCustomer(String customerID);
+    //Get all reservations for a certain customer: List<Table>
+    List<Reservation> allReservationsForCustomer(String customerID);
 
     //Få fram lediga tider: List<LocalDateTime>
 
