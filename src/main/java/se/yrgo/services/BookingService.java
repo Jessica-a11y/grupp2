@@ -12,10 +12,11 @@ public interface BookingService {
     List<Customer> getAllCustomers();
     void addTable(Table table);
     List<Table> getAllTables();
+    List<Table> getAllAvailableTables();
     void addReservation(Reservation reservation);
     List<Reservation> getAllReservations();
-    List<Table> getAllAvailableTables();
-     //Get all reservations for a certain table: List<Reservation>
+    
+    //Get all reservations for a certain table: List<Reservation>
     List<Reservation> allReservationsForTable(Table table);
     //Get all reservations for a certain customer: List<Table>
     List<Reservation> allReservationsForCustomer(String customerID);
