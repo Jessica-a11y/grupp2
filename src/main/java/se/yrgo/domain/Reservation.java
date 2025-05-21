@@ -1,10 +1,12 @@
 package se.yrgo.domain;
 
 import java.time.*;
+
+import javax.persistence.Entity;
 /**
  * Author Daniel Grahn
  */
-
+@Entity
 public class Reservation{
     private String reservationId;
     private String tableId;

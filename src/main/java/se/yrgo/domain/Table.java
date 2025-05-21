@@ -1,7 +1,11 @@
 package se.yrgo.domain;
+
+import javax.persistence.Entity;
+
 /**
  * Author Daniel Grahn 
  */
+@Entity
 public class Table {
     private int tableNumber;
     private int amountOfSeats;
