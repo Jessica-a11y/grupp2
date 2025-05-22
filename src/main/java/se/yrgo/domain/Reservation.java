@@ -17,7 +17,7 @@ public class Reservation{
     private String reservationId;
     private String tableId;
     private String customerId;
-    
+
     private LocalDate reservationDate;
     private LocalTime reservationTime;
 
@@ -33,6 +33,10 @@ public class Reservation{
 
     public String getReservationId() {
         return reservationId;
+    }
+
+    public int getId() {
+        return id;
     }
 
     public String getTableId() {
