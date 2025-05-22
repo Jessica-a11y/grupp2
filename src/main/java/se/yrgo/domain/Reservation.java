@@ -3,17 +3,25 @@ package se.yrgo.domain;
 import java.time.*;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 /**
  * Author Daniel Grahn
  */
 @Entity
 public class Reservation{
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private int id;
     private String reservationId;
     private String tableId;
     private String customerId;
-
+    
     private LocalDate reservationDate;
     private LocalTime reservationTime;
+
+    public Reservation() {}
 
     public Reservation(String reservationId, String tableId, String customerId, LocalDate reservationDate, LocalTime reservationTime) {
         this.reservationId = reservationId;
