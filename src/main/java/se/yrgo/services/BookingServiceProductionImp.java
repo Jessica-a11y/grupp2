@@ -6,14 +6,15 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import se.yrgo.data.BookingDao;
+import se.yrgo.data.TableNotAvailableException;
 import se.yrgo.domain.*;
 
 @Service("bookingService")
 @Transactional
-public class BookingServiceProductionImp implements BookingService{
+public class BookingServiceProductionImp implements BookingService {
     private BookingDao dao;
 
-    public BookingServiceProductionImp(BookingDao dao){
+    public BookingServiceProductionImp(BookingDao dao) {
         this.dao = dao;
     }
 
@@ -43,18 +44,19 @@ public class BookingServiceProductionImp implements BookingService{
     }
 
     @Override
-    public void addReservation(Reservation reservation) {
-        dao.createReservation(reservation); 
+    @Transactional(rollbackFor = TableNotAvailableException.class)
+    public void addReservation(Reservation reservation) throws TableNotAvailableException {
+        dao.createReservation(reservation);
     }
 
     @Override
     public List<Reservation> getAllReservations() {
-       return dao.allReservations();
+        return dao.allReservations();
     }
 
     @Override
     public List<Reservation> allReservationsForTable(String tableId) {
-       return dao.allReservationsForTable(tableId);
+        return dao.allReservationsForTable(tableId);
     }
 
     @Override
@@ -62,5 +64,5 @@ public class BookingServiceProductionImp implements BookingService{
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'allReservationsForCustomer'");
     }
-    
+
 }
