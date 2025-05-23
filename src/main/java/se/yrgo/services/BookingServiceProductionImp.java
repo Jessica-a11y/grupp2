@@ -5,8 +5,7 @@ import java.util.*;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import se.yrgo.data.BookingDao;
-import se.yrgo.data.TableNotAvailableException;
+import se.yrgo.data.*;
 import se.yrgo.domain.*;
 
 @Service("bookingService")
@@ -60,9 +59,18 @@ public class BookingServiceProductionImp implements BookingService {
     }
 
     @Override
-    public List<Reservation> allReservationsForCustomer(String customerID) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'allReservationsForCustomer'");
+    public List<Reservation> allReservationsForCustomer(String customerID) throws CustomerNotFoundException {
+        //Before geting the list of reservations, we have to know if the customer excist.
+        List<Customer> allCustomers = dao.allCustomers();
+
+        for (Customer customer : allCustomers) {
+            //System.out.println(customer.getName() + " " + customer.getCustomerID());
+            if(customer.getCustomerID().equals(customerID)){
+                return  dao.allReservationsForCustomer(customerID);
+            }
+        }
+
+        throw new CustomerNotFoundException();
     }
 
 }

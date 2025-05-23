@@ -19,7 +19,7 @@ public class BookingDaoJpaImpl implements BookingDao{
     private static final String SELECT_AVAILABLE_TABLES = "select table from Table as table where table.available = true";
     private static final String SELECT_ALL_RESERVATIONS = "select reservation from Reservation as reservation";
     private static final String SELECT_RESERVATIONS_FOR_TABLE = "select reservation from Reservation as reservation where reservation.tableId = :tableID";
-    private static final String SELECT_RESERVATIONS_FOR_CUSTOMER = "select reservation from Reservation as reservation where reservation.customerID = :customerID";
+    private static final String SELECT_RESERVATIONS_FOR_CUSTOMER = "select reservation from Reservation as reservation where reservation.customerId = :customerID";
 
     @Override
     public void createCustomer(Customer newCustomer) {
