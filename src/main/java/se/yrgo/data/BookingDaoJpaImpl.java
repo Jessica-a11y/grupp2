@@ -37,6 +37,7 @@ public class BookingDaoJpaImpl implements BookingDao{
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public List<Table> availableTables() {
         return em.createQuery("select table from Table as table where table.available = true").getResultList();
     }
@@ -52,11 +53,13 @@ public class BookingDaoJpaImpl implements BookingDao{
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public List<Reservation> allReservationsForTable(String tableId) {
         return em.createQuery("select reservation from Reservation as reservation where reservation.tableId = :tableID").setParameter("tableID", tableId).getResultList();
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public List<Reservation> allReservationsForCustomer(String customerID) {
         return em.createQuery("select reservation from Reservation as reservation where reservation.customerID = :customerID").setParameter("customerID", customerID).getResultList();
     }
