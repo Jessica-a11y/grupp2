@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 import se.yrgo.domain.*;
 
 @Repository
-public class BookingDaoJdbcImpl implements BookingDao{
+public class BookingDaoJpaImpl implements BookingDao{
     @PersistenceContext
     private EntityManager em;
 
@@ -52,8 +52,8 @@ public class BookingDaoJdbcImpl implements BookingDao{
     }
 
     @Override
-    public List<Reservation> allReservationsForTable(Table table) {
-        return em.createQuery("select reservation from Reservation as reservation where reservation.tableId = :tableID").setParameter("tableID", table.getTableNumber()).getResultList();
+    public List<Reservation> allReservationsForTable(String tableId) {
+        return em.createQuery("select reservation from Reservation as reservation where reservation.tableId = :tableID").setParameter("tableID", tableId).getResultList();
     }
 
     @Override

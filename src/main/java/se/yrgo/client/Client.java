@@ -14,15 +14,15 @@ public class Client {
         BookingService service = container.getBean("bookingService", BookingService.class);
         
         service.addCustomer(new Customer("123", "John Doe", "doe.john@gmail.com", "0707080908"));
-        service.addCustomer(new Customer("1", "Anna Andersson", "anna@gmail.com", "0701234567"));
-        service.addCustomer(new Customer("2", "Bertil Bengtsson", "bertil@gmail.com", "0709876543"));
-        service.addCustomer(new Customer("3", "Cecilia Citron", "cecilia@gmail.com", "0706146846"));
+        service.addCustomer(new Customer("124", "Anna Andersson", "anna@gmail.com", "0701234567"));
+        service.addCustomer(new Customer("125", "Bertil Bengtsson", "bertil@gmail.com", "0709876543"));
+        service.addCustomer(new Customer("126", "Cecilia Citron", "cecilia@gmail.com", "0706146846"));
         
         //service.addTable(new Table(1, 4, false));
         //service.addTable(new Table(2, 2, true));
         //service.addTable(new Table(3, 6, true));
         
-        service.addReservation(new Reservation("r1", "1", "1", LocalDate.now().plusDays(1), LocalTime.of(18, 0)));
+        //service.addReservation(new Reservation("r1", "1", "1", LocalDate.now().plusDays(1), LocalTime.of(18, 0)));
 
 
 

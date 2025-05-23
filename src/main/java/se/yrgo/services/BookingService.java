@@ -15,10 +15,7 @@ public interface BookingService {
     List<Table> getAllAvailableTables();
     void addReservation(Reservation reservation);
     List<Reservation> getAllReservations();
-    
-    //Get all reservations for a certain table: List<Reservation>
-    List<Reservation> allReservationsForTable(Table table);
-    //Get all reservations for a certain customer: List<Table>
+    List<Reservation> allReservationsForTable(String tableId);
     List<Reservation> allReservationsForCustomer(String customerID);
 
     //Få fram lediga tider: List<LocalDateTime>

@@ -11,6 +11,10 @@ import se.yrgo.domain.*;
 public class BookingServiceProductionImp implements BookingService{
     private BookingDao dao;
 
+    public BookingServiceProductionImp(BookingDao dao){
+        this.dao = dao;
+    }
+
     @Override
     public void addCustomer(Customer customer) {
         dao.createCustomer(customer);
@@ -43,14 +47,12 @@ public class BookingServiceProductionImp implements BookingService{
 
     @Override
     public List<Reservation> getAllReservations() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getAllReservations'");
+       return dao.allReservations();
     }
 
     @Override
-    public List<Reservation> allReservationsForTable(Table table) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'allReservationsForTable'");
+    public List<Reservation> allReservationsForTable(String tableId) {
+       return dao.allReservationsForTable(tableId);
     }
 
     @Override
