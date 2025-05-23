@@ -40,7 +40,7 @@
 	    <property name="dataSource" ref="dataSource"/>
 	    <property name="packagesToScan">
 		    <list>
-		        <value>se.yrgo.spring.domain</value>
+		        <value>se.yrgo.domain</value>
 		    </list>
 		</property>
 		<property name="hibernateProperties">

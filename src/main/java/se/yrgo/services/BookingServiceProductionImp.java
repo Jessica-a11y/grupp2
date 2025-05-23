@@ -3,11 +3,13 @@ package se.yrgo.services;
 import java.util.*;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import se.yrgo.data.BookingDao;
 import se.yrgo.domain.*;
 
 @Service("bookingService")
+@Transactional
 public class BookingServiceProductionImp implements BookingService{
     private BookingDao dao;
 
