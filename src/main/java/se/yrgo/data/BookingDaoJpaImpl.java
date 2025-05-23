@@ -61,7 +61,7 @@ public class BookingDaoJpaImpl implements BookingDao{
     @Override
     @SuppressWarnings("unchecked")
     public List<Reservation> allReservationsForCustomer(String customerID) {
-        return em.createQuery("select reservation from Reservation as reservation where reservation.customerID = :customerID").setParameter("customerID", customerID).getResultList();
+        return em.createQuery("select reservation from Reservation as reservation where reservation.customerId = :customerID").setParameter("customerID", customerID).getResultList();
     }
 
   
