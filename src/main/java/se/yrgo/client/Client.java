@@ -1,7 +1,10 @@
 package se.yrgo.client;
 
 import se.yrgo.services.BookingService;
+<<<<<<< HEAD
 import se.yrgo.data.CustomerNotFoundException;
+=======
+>>>>>>> d56034bc4350e1ed3bf588c537442c9206e05130
 import se.yrgo.data.TableNotAvailableException;
 import se.yrgo.domain.*;
 import se.yrgo.domain.Table;
@@ -16,6 +19,7 @@ public class Client {
         ClassPathXmlApplicationContext container = new ClassPathXmlApplicationContext("application.xml");
         BookingService service = container.getBean("bookingService", BookingService.class);
         
+<<<<<<< HEAD
         service.addCustomer(new Customer("123", "John Doe", "doe.john@gmail.com", "0707080908"));
         service.addCustomer(new Customer("124", "Anna Andersson", "anna@gmail.com", "0701234567"));
         service.addCustomer(new Customer("125", "Bertil Bengtsson", "bertil@gmail.com", "0709876543"));
@@ -33,6 +37,20 @@ public class Client {
             System.out.println("hej");
             //This is suppose to not work
             System.out.println(service.allReservationsForCustomer("1"));
+=======
+        try {
+            setUp(service);
+            LocalTime.now();
+            service.addReservation(new Reservation("9900", "1", "123", LocalDate.now(), LocalTime.of(18, 0)));
+        } catch(TableNotAvailableException e) {
+            System.out.println("Sorry, no table avaliable at this date and time.");
+        } finally {
+            container.close(); 
+        }
+        
+        
+
+>>>>>>> d56034bc4350e1ed3bf588c537442c9206e05130
 
         } 
         catch (TableNotAvailableException t) {
@@ -42,7 +60,7 @@ public class Client {
             System.out.println(e.getMessage());
         }
 
-        container.close(); 
+        
     }
 
     public void introduction() {
@@ -51,31 +69,15 @@ public class Client {
         System.out.println("For more information type 'info' \n");
     }
 
-    public static void setUp(EntityManager em) {
-        EntityTransaction tx = em.getTransaction();
-        tx.begin();
-        /*
-         * Table t1 = Table(1, 4, false);
-         * tables.put(2, new Table(2, 2, true));
-         * tables.put(3, new Table(3, 6, true));
-         * 
-         * //Adding some customers
-         * customers.put("1", new Customer("1", "Anna Andersson", "anna@gmail.com",
-         * "0701234567"));
-         * customers.put("2", new Customer("2","Bertil Bengtsson", "bertil@gmail.com",
-         * "0709876543"));
-         * // customers.put("3", new Customer("3","Cecilia Citron", "cecilia@gmail.com",
-         * "0706146846"));
-         * 
-         * //Adding some bookings
-         * reservations.put("r1", new Reservation(
-         * "r1", "1", "1",
-         * LocalDate.now().plusDays(1),
-         * LocalTime.of(18, 0)
-         * ));
-         */
-        tx.commit();
-        em.close();
+    public static void setUp(BookingService service) {
+        service.addCustomer(new Customer("123", "John Doe", "doe.john@gmail.com", "0707080908"));
+        service.addCustomer(new Customer("124", "Anna Andersson", "anna@gmail.com", "0701234567"));
+        service.addCustomer(new Customer("125", "Bertil Bengtsson", "bertil@gmail.com", "0709876543"));
+        service.addCustomer(new Customer("126", "Cecilia Citron", "cecilia@gmail.com", "0706146846")); 
+        
+        service.addTable(new Table("1", 4, true));
+        service.addTable(new Table("2", 2, true));
+        service.addTable(new Table("3", 6, true)); 
     }
 
     public void info() {

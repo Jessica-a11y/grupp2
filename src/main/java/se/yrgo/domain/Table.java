@@ -13,13 +13,13 @@ public class Table {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
-    private int tableNumber;
+    private String tableNumber;
     private int amountOfSeats;
     private Boolean available;
 
     public Table() {}
 
-    public Table(int tableNumber, int amountOfSeats, Boolean available) {
+    public Table(String tableNumber, int amountOfSeats, Boolean available) {
         this.tableNumber = tableNumber;
         this.amountOfSeats = amountOfSeats;
         this.available = available; 
@@ -33,7 +33,7 @@ public class Table {
         return id;
     }
 
-    public int getTableNumber() {
+    public String getTableNumber() {
         return tableNumber;
     }
 
