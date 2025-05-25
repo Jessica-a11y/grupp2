@@ -32,7 +32,7 @@ public class SimpleTest {
 
     @Test
     public void addTable() {
-        Table newTable = new Table(1, 4, false);
+        Table newTable = new Table("1", 4, false);
         service.addTable(newTable);
     }
 

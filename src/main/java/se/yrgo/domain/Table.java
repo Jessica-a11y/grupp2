@@ -19,7 +19,7 @@ public class Table {
 
     public Table() {}
 
-    public Table(int tableNumber, int amountOfSeats, Boolean available) {
+    public Table(String tableNumber, int amountOfSeats, Boolean available) {
         this.tableNumber = tableNumber;
         this.amountOfSeats = amountOfSeats;
         this.available = available; 
