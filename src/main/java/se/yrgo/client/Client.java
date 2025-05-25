@@ -1,6 +1,7 @@
 package se.yrgo.client;
 
 import se.yrgo.services.BookingService;
+import se.yrgo.data.CustomerNotFoundException;
 import se.yrgo.data.TableNotAvailableException;
 import se.yrgo.domain.*;
 import se.yrgo.domain.Table;
@@ -12,7 +13,7 @@ import java.time.*;
 
 public class Client { 
     public static void main(String[] args) {
-        ClassPathXmlApplicationContext container = new ClassPathXmlApplicationContext("application.xml");
+        ClassPathXmlApplicationContext container = new ClassPathXmlApplicationContext("application.xml"); //Här
         BookingService service = container.getBean("bookingService", BookingService.class);
         
         // service.addCustomer(new Customer("123", "John Doe", "doe.john@gmail.com", "0707080908"));
@@ -28,10 +29,24 @@ public class Client {
         // try {
         //     //This should work
         //     service.addReservation(new Reservation("r1", "1", "124", LocalDate.now().plusDays(1), LocalTime.of(18, 0)));
-        //     System.out.println(service.allReservationsForCustomer("124"));
+        //     List<Reservation> result = service.allReservationsForCustomer("124");
+        //     for(Reservation r : result) {
+        //         System.out.println(r);
+        //     }
+            
         //     System.out.println("hej");
+
+
         //     //This is suppose to not work
         //     System.out.println(service.allReservationsForCustomer("1"));
+        // } 
+        // catch (TableNotAvailableException t) {
+        //     System.out.println(t.getMessage());
+        // } 
+        // catch (CustomerNotFoundException e) {
+        //     System.out.println(e.getMessage());
+        // }
+
         try {
             setUp(service);
             LocalTime.now();
@@ -45,13 +60,6 @@ public class Client {
         
 
 
-        // } 
-        // catch (TableNotAvailableException t) {
-        //     System.out.println(t.getMessage());
-        // } 
-        // catch (CustomerNotFoundException e) {
-        //     System.out.println(e.getMessage());
-        // }
 
         
     }

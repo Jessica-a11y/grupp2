@@ -45,7 +45,14 @@ public class BookingServiceProductionImp implements BookingService {
     @Override
     @Transactional(rollbackFor = TableNotAvailableException.class)
     public void addReservation(Reservation reservation) throws TableNotAvailableException {
-        dao.createReservation(reservation);
+        List<Table> allTables = dao.allTables();
+        
+        for (Table table : allTables) {
+            if(String.valueOf(table.getId()).equals(reservation.getTableId())){
+                dao.createReservation(reservation);
+            }
+        }
+        throw new TableNotAvailableException();
     }
 
     @Override
