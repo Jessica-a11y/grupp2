@@ -1,14 +1,13 @@
 package se.yrgo.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import java.util.*;
+
+import javax.persistence.*;
 
 /**
- * Author Daniel Grahn 
+ * Author Daniel Grahn & Emilia Jarleback
  */
-@Entity
+@Entity(name = "DiningTable") //Table är ett reserverat namn i SQL
 public class Table {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -17,12 +16,16 @@ public class Table {
     private int amountOfSeats;
     private Boolean available;
 
-    public Table() {}
+    @OneToMany(mappedBy = "table")
+    private Set<Reservation> reservations;
+
+    public Table() {
+    }
 
     public Table(String tableNumber, int amountOfSeats, Boolean available) {
         this.tableNumber = tableNumber;
         this.amountOfSeats = amountOfSeats;
-        this.available = available; 
+        this.available = available;
     }
 
     public void tableNotAvailable() {
@@ -45,8 +48,13 @@ public class Table {
         return available;
     }
 
+    public Set<Reservation> getReservations() {
+        return reservations;
+    }
+
     @Override
-    public String toString(){ 
-        return String.format("Table number: %s - Amount of seats: %s - Available: %b", tableNumber, amountOfSeats, available);
+    public String toString() {
+        return String.format("Table number: %s - Amount of seats: %s - Available: %b", tableNumber, amountOfSeats,
+                available);
     }
 }

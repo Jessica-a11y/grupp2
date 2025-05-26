@@ -4,6 +4,7 @@ import se.yrgo.services.BookingService;
 import se.yrgo.data.TableNotAvailableException;
 import se.yrgo.domain.*;
 import se.yrgo.domain.Table;
+import se.yrgo.domain.Reservation;
 
 import javax.persistence.*;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -18,7 +19,11 @@ public class Client {
         try {
             setUp(service);
             LocalTime.now();
-            service.addReservation(new Reservation("9900", "1", "123", LocalDate.now(), LocalTime.of(18, 0)));
+
+            Customer c1 = new Customer("1", "Lena", "lena@example.com", "0708763452");
+            Table t1 = new Table("4", 4, true);
+
+            service.addReservation(new Reservation("9900", t1, c1, LocalDate.now(), LocalTime.of(18, 0)));
         } catch(TableNotAvailableException e) {
             System.out.println("Sorry, no table avaliable at this date and time.");
         } finally {

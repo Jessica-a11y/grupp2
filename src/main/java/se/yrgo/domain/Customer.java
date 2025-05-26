@@ -1,10 +1,11 @@
 package se.yrgo.domain;
 
+import java.util.*;
+
 import javax.persistence.*;
 
-
 /**
- * Auhtor Jessica Olofsson
+ * Auhtor Jessica Olofsson & Emilia Jarleback
  */
 @Entity
 public class Customer {
@@ -16,7 +17,11 @@ public class Customer {
     private String email;
     private String telephone;
 
-    public Customer() {}
+    @OneToMany(mappedBy = "customer")
+    private Set<Reservation> reservations;
+
+    public Customer() {
+    }
 
     public Customer(String customerID, String name, String email, String telephone) {
         this.customerID = customerID;
@@ -28,7 +33,7 @@ public class Customer {
     public int getId() {
         return id;
     }
-    
+
     public String getCustomerID() {
         return customerID;
     }
@@ -45,10 +50,14 @@ public class Customer {
         return telephone;
     }
 
-    @Override
-    public String toString(){ 
-        return String.format("Customer ID: %s - Name: %s - email: %s - Telephone_Number: %s", customerID, name, email, telephone);
+    public Set<Reservation> getReservations() {
+        return reservations;
     }
-   
-}
 
+    @Override
+    public String toString() {
+        return String.format("Customer ID: %s - Name: %s - email: %s - Telephone_Number: %s", customerID, name, email,
+                telephone);
+    }
+
+}
