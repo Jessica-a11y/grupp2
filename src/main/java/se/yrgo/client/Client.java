@@ -9,7 +9,6 @@ import se.yrgo.domain.*;
 import se.yrgo.domain.DiningTable;
 import se.yrgo.domain.Reservation;
 
-import javax.persistence.*;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import java.util.*;
 import java.time.*;
