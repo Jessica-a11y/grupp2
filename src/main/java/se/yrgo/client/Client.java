@@ -78,7 +78,7 @@ public class Client {
         String reservationID = input.nextLine();
         List<Reservation> result = service.findReservation(reservationID);
         for (Reservation r : result) {
-            System.out.println(r);
+            System.out.println(r.info());
         }
     }
 
