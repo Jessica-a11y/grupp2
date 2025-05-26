@@ -9,7 +9,7 @@ import se.yrgo.domain.*;
  * Author Daniel Grahn, Jessica Olofsson
  */
 public interface BookingService {
-    public void makeReservation(String customerId);
+    public void makeReservation(String date, String time, int amountOfSeats, String fullName, String email, String number);
     public void updateReservation(Reservation changedReservation);
     public void deleteReservatuion(String reservationId);
     public Reservation findReservation(String reservationID);

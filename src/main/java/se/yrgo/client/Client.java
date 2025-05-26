@@ -50,7 +50,6 @@ public class Client {
         switch (option) {
             case 1:
                 create(input, service);
-               // service.makeReservation();
                 break;
 
             case 2:
@@ -101,7 +100,24 @@ public class Client {
     
 
     public static void create(Scanner input, BookingService service) {
-        
+        System.out.println("What day would you like to book?");
+        String date = input.nextLine();
+        String time = timePicker(input);
+        System.out.println("Amount of people");
+        int amountOfPeople = input.nextInt();
+        input.nextLine();
+        System.out.println("First and lastname");
+        String fullName = input.nextLine(); 
+        System.out.println("Email");
+        String email = input.nextLine();
+        System.out.println("Phone number");
+        String number = input.nextLine();
+        List<String> strings = List.of(date, time, fullName, email, number);
+        for(String s : strings) {
+            System.out.println(s);
+        }
+
+        service.makeReservation(date, time, amountOfPeople, fullName, email, number);
        
         //Vem är person vi söker 
 
@@ -115,6 +131,35 @@ public class Client {
 
         //skicka
         
+    }
+
+    public static String timePicker(Scanner input) {
+        System.out.println("At what time?");
+        System.out.println("1. 16:00\n" + 
+                            "2. 18:00\n" + 
+                            "3. 20:00\n" + 
+                            "4. 22:00");
+        int option = input.nextInt();
+        input.nextLine();
+        String time = "";
+        switch (option) {
+            case 1:
+                time = "16:00";
+                break;
+            case 2:
+                time = "18:00";
+                break;
+            case 3:
+                time = "20:00";
+                break;
+            case 4:
+                time = "22:00";
+                break;
+            default:
+                System.out.println("try again");
+                break;
+        }
+        return time;
     }
 
     public static void setUp(CustomerService customerService, TableService tableService,
