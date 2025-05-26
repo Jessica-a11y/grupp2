@@ -2,12 +2,10 @@ package se.yrgo.domain;
 
 import java.time.*;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+
 /**
- * Author Daniel Grahn
+ * Author Daniel Grahn & Emilia Jarleback
  */
 @Entity
 public class Reservation{
@@ -15,18 +13,24 @@ public class Reservation{
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
     private String reservationId;
-    private String tableId;
-    private String customerId;
+
+    @ManyToOne
+    @JoinColumn(name = "table_id")
+    private DiningTable table;
+
+    @ManyToOne
+    @JoinColumn(name = "customer_id")
+    private Customer customer;
 
     private LocalDate reservationDate;
     private LocalTime reservationTime;
 
     public Reservation() {}
 
-    public Reservation(String reservationId, String tableId, String customerId, LocalDate reservationDate, LocalTime reservationTime) {
+    public Reservation(String reservationId, DiningTable table, Customer customer, LocalDate reservationDate, LocalTime reservationTime) {
         this.reservationId = reservationId;
-        this.tableId = tableId;
-        this.customerId = customerId;
+        this.table = table;
+        this.customer = customer;
         this.reservationDate = reservationDate;
         this.reservationTime = reservationTime;
     }
@@ -39,12 +43,12 @@ public class Reservation{
         return id;
     }
 
-    public String getTableId() {
-        return tableId;
+    public DiningTable getTable() {
+        return table;
     }
 
-    public String getCustomerId() {
-        return customerId;
+    public Customer getCustomer() {
+        return customer;
     }
 
     public LocalDate getReservationDate() {
@@ -53,11 +57,11 @@ public class Reservation{
 
     public LocalTime getReservationTime() {
         return reservationTime;
-    } 
+    }
 
     @Override
-    public String toString(){ 
-        return "Reservation ID: "+reservationId +" - Table ID: " + tableId + " - Customer ID: " + customerId + " - Reservation Date: " + reservationDate + " - Reservation Time: " + reservationTime;
+    public String toString() {
+        return "Reservation [id=" + id + ", reservationId=" + reservationId + ", table=" + table + ", customer="
+                + customer + ", reservationDate=" + reservationDate + ", reservationTime=" + reservationTime + "]";
     }
-   
 } 

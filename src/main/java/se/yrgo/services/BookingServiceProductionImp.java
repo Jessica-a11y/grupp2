@@ -2,6 +2,7 @@ package se.yrgo.services;
 
 import java.util.*;
 
+import org.hibernate.transform.ToListResultTransformer;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -11,82 +12,46 @@ import se.yrgo.domain.*;
 @Service("bookingService")
 @Transactional
 public class BookingServiceProductionImp implements BookingService {
-    private BookingDao dao;
+    private CustomerService customerService;
+    private TableService tableService;
+    private ReservationService reservationService;
 
-    public BookingServiceProductionImp(BookingDao dao) {
-        this.dao = dao;
+    public BookingServiceProductionImp(CustomerService cs, TableService ts){
+        this.customerService = cs;
+        this. tableService = ts;
     }
 
     @Override
-    public void addCustomer(Customer customer) {
-        dao.createCustomer(customer);
-    }
+    public void makeReservation() {
+        System.out.println("Maybe we will make one");
+       
 
-    @Override
-    public List<Customer> getAllCustomers() {
-        return dao.allCustomers();
-    }
-
-    @Override
-    public void addTable(Table table) {
-        dao.createTable(table);
-    }
-
-    @Override
-    public List<Table> getAllTables() {
-        return dao.allTables();
-    }
-
-    @Override
-    public List<Table> getAllAvailableTables() {
-        return dao.availableTables();
-    }
-
-    @Override
-    @Transactional(rollbackFor = TableNotAvailableException.class)
-    public void addReservation(Reservation reservation) throws TableNotAvailableException {
-        List<Table> allTables = dao.allTables();
-        boolean fonundTable = false;
+        /*   Kontrollera att bordet är ledigt vid önskat datum/tid.
+            Kontrollera om kunden finns, annars skapa en ny kund.
+            Skapa reservation och länka till kund och bord.
+            Spara reservationen. */
         
-        for (Table table : allTables) {
-
-            System.out.println(String.valueOf(table.getId()) +" "+reservation.getTableId());
-            if(String.valueOf(table.getId()).equals(reservation.getTableId())){
-                fonundTable = true;
-                break;
-            }
-        }
-        
-        if(fonundTable){
-            dao.createReservation(reservation);
-        }else{
-            throw new TableNotAvailableException();
-        }
     }
 
     @Override
-    public List<Reservation> getAllReservations() {
-        return dao.allReservations();
+    public void updateReservation(Reservation changedReservation) {
+        System.out.println("Updated! NOT!");
+    }
+    
+    @Override
+    public void deleteReservatuion() {
+        System.out.println("We removed your reservation");
     }
 
     @Override
-    public List<Reservation> allReservationsForTable(String tableId) {
-        return dao.allReservationsForTable(tableId);
+    public List<Reservation> findReservation(String reservationID) {
+        return reservationService.allReservationsForCustomer(reservationID);
     }
-
+    
+    
     @Override
-    public List<Reservation> allReservationsForCustomer(String customerID) throws CustomerNotFoundException {
-        //Before geting the list of reservations, we have to know if the customer excist.
-        List<Customer> allCustomers = dao.allCustomers();
-
-        for (Customer customer : allCustomers) {
-            //System.out.println(customer.getName() + " " + customer.getCustomerID());
-            if(customer.getCustomerID().equals(customerID)){
-                return  dao.allReservationsForCustomer(customerID);
-            }
-        }
-
-        throw new CustomerNotFoundException();
+    public void availableTables() {
+        System.out.println("Avaliable tables");
     }
 
 }
