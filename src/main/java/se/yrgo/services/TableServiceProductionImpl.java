@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import se.yrgo.data.BookingDao;
-import se.yrgo.domain.Table;
+import se.yrgo.domain.DiningTable;
 
 @Service("tableService")
 @Transactional
@@ -18,22 +18,22 @@ public class TableServiceProductionImpl implements TableService{
     }
 
     @Override
-    public void addTable(Table table) {
+    public void addTable(DiningTable table) {
         dao.createTable(table);
     }
 
     @Override
-    public Table getTable(String tableId) {
+    public DiningTable getTable(String tableId) {
         return dao.findTableById(tableId);
     }
 
     @Override
-    public List<Table> getAllTables() {
+    public List<DiningTable> getAllTables() {
         return dao.allTables();
     }
 
     @Override
-    public List<Table> getAllAvailableTables() {
+    public List<DiningTable> getAllAvailableTables() {
         return dao.availableTables();
     }
     

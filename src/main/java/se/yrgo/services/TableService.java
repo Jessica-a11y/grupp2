@@ -4,9 +4,9 @@ import java.util.List;
 import se.yrgo.domain.*;
 
 public interface TableService {
-    void addTable(Table table);
-    Table getTable(String tableId);
-    List<Table> getAllTables();
-    List<Table> getAllAvailableTables();
+    void addTable(DiningTable table);
+    DiningTable getTable(String tableId);
+    List<DiningTable> getAllTables();
+    List<DiningTable> getAllAvailableTables();
     
 } 

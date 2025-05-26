@@ -6,7 +6,7 @@ import se.yrgo.services.ReservationService;
 import se.yrgo.services.TableService;
 import se.yrgo.data.TableNotAvailableException;
 import se.yrgo.domain.*;
-import se.yrgo.domain.Table;
+import se.yrgo.domain.DiningTable;
 import se.yrgo.domain.Reservation;
 
 import javax.persistence.*;
@@ -85,9 +85,9 @@ public class Client {
         customerService.addCustomer(new Customer("125", "Bertil Bengtsson", "bertil@gmail.com", "0709876543"));
         customerService.addCustomer(new Customer("126", "Cecilia Citron", "cecilia@gmail.com", "0706146846")); 
     
-        tableService.addTable(new Table("1", 4, true));
-        tableService.addTable(new Table("2", 2, true));
-        tableService.addTable(new Table("3", 6, true)); 
+        tableService.addTable(new DiningTable("1", 4, true));
+        tableService.addTable(new DiningTable("2", 2, true));
+        tableService.addTable(new DiningTable("3", 6, true)); 
 
         LocalTime.now();
         reservationService.addReservation(new Reservation("12345", tableService.getTable("1"), customerService.getCustomer("123"), LocalDate.now(), LocalTime.of(18, 0)));

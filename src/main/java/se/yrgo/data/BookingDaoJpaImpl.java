@@ -15,19 +15,19 @@ public class BookingDaoJpaImpl implements BookingDao {
     private EntityManager em;
 
     private static final String SELECT_ALL_CUSTOMERS = "select customer from Customer as customer";
-    private static final String SELECT_ALL_TABLES = "select table from Table as table";
-    private static final String SELECT_AVAILABLE_TABLES = "select table from Table as table where table.available = true";
+    private static final String SELECT_ALL_TABLES = "select table from DiningTable as table";
+    private static final String SELECT_AVAILABLE_TABLES = "select table from DiningTable as table where table.available = true";
     private static final String SELECT_ALL_RESERVATIONS = "select reservation from Reservation as reservation";
     private static final String SELECT_RESERVATIONS_FOR_TABLE = "select reservation from Reservation as reservation where reservation.tableId = :tableID";
     private static final String SELECT_RESERVATIONS_FOR_CUSTOMER = "select reservation from Reservation as reservation where reservation.reservationId = :reservationID";
 
     private static final String UPDATE_RESERVATION = "UPDATE Reservation as r SET r.tableId = :tableId, r.customerId = :customerId, r.reservationDate = :reservationDate, r.reservationTime = :reservationTime WHERE r.reservationId = :reservationId";
     private static final String UPDATE_CUSTOMER = "UPDATE Customer as c SET c.name = :name, c.email = :email, c.telephone = :telephone";
-    private static final String UPDATE_Table = "UPDATE Table as t SET t.amountOfSeats = :amountOfSeats, t.available = :available WHERE t.tableNumber = :tableNumber";
+    private static final String UPDATE_Table = "UPDATE DiningTable as t SET t.amountOfSeats = :amountOfSeats, t.available = :available WHERE t.tableNumber = :tableNumber";
 
     private static final String DELET_RESERVATION = "DELETE FROM Reservation as r WHERE r.reservationId = :reservationId";
     private static final String DELET_CUSTOMER = "DELETE FROM Customer as c WHERE c.customerID = :customerID";
-    private static final String DELET_Table = "DELETE FROM Table as t WHERE t.tableNumber = :tableNumber";
+    private static final String DELET_Table = "DELETE FROM DiningTable as t WHERE t.tableNumber = :tableNumber";
 
     // Create
     @Override
@@ -42,7 +42,7 @@ public class BookingDaoJpaImpl implements BookingDao {
     }
 
     @Override
-    public void createTable(Table newTable) {
+    public void createTable(DiningTable newTable) {
         System.out.println("using JPA");
         em.persist(newTable);
     }
@@ -54,8 +54,8 @@ public class BookingDaoJpaImpl implements BookingDao {
     }
 
     @Override
-    public List<Table> allTables() {
-        return em.createQuery(SELECT_ALL_TABLES, Table.class).getResultList();
+    public List<DiningTable> allTables() {
+        return em.createQuery(SELECT_ALL_TABLES, DiningTable.class).getResultList();
     }
 
     @Override
@@ -65,7 +65,7 @@ public class BookingDaoJpaImpl implements BookingDao {
 
     @Override
     @SuppressWarnings("unchecked")
-    public List<Table> availableTables() {
+    public List<DiningTable> availableTables() {
         return em.createQuery(SELECT_AVAILABLE_TABLES).getResultList();
     }
 
@@ -103,7 +103,7 @@ public class BookingDaoJpaImpl implements BookingDao {
     }
 
     @Override
-    public void updateTable(Table changedTable) {
+    public void updateTable(DiningTable changedTable) {
         em.createNativeQuery(UPDATE_Table)
                 .setParameter("amountOfSeats", changedTable.getAmountOfSeats())
                 .setParameter("available", changedTable.getAvailable())
@@ -127,15 +127,15 @@ public class BookingDaoJpaImpl implements BookingDao {
     }
 
     @Override
-    public void deletTable(Table table) {
+    public void deletTable(DiningTable table) {
         em.createQuery(DELET_Table)
                 .setParameter("tableNumber", table.getTableNumber())
                 .executeUpdate();
     }
 
     @Override
-    public Table findTableById(String tableNumber) {
-        return (Table) em.createQuery("select table from DiningTable as table where table.tableNumber = :tableNumber").setParameter("tableNumber", tableNumber).getSingleResult();
+    public DiningTable findTableById(String tableNumber) {
+        return (DiningTable) em.createQuery("select table from DiningTable as table where table.tableNumber = :tableNumber").setParameter("tableNumber", tableNumber).getSingleResult();
     }
 
     @Override
