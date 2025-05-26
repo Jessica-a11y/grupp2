@@ -61,7 +61,7 @@ public class Reservation{
 
     @Override
     public String toString() {
-        return "Reservation [id=" + id + ", reservationId=" + reservationId + ", table=" + table + ", customer="
+        return "Reservation: Reservation ID:" + reservationId + ", table=" + table + ", customer="
                 + customer + ", reservationDate=" + reservationDate + ", reservationTime=" + reservationTime + "]";
     }
 } 

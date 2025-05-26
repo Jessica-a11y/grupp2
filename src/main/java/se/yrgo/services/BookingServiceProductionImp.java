@@ -16,9 +16,10 @@ public class BookingServiceProductionImp implements BookingService {
     private TableService tableService;
     private ReservationService reservationService;
 
-    public BookingServiceProductionImp(CustomerService cs, TableService ts){
+    public BookingServiceProductionImp(CustomerService cs, TableService ts, ReservationService rs){
         this.customerService = cs;
         this. tableService = ts;
+        this.reservationService = rs;
     }
 
     @Override
