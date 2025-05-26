@@ -61,7 +61,16 @@ public class Reservation{
 
     @Override
     public String toString() {
-        return "Reservation [id=" + id + ", reservationId=" + reservationId + ", table=" + table + ", customer="
-                + customer + ", reservationDate=" + reservationDate + ", reservationTime=" + reservationTime + "]";
+        return "Reservation:\n\tReservation ID: " + reservationId + 
+                "\n\tTable: " + table + 
+                "\n\tCustomer: " + customer + ", Date: " + reservationDate + 
+                "\n\tTime: " + reservationTime;
+    }
+
+    public String info() {
+        return "Reservation:" +  
+                "\n\tName: " + customer.getName() + " - Email: " + customer.getEmail() + " - Phone number" + customer.getTelephone() +
+                "\n\tDate: " + reservationDate + 
+                "\n\tTime: " + reservationTime + "\n";
     }
 } 

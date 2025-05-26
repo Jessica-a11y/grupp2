@@ -140,6 +140,6 @@ public class BookingDaoJpaImpl implements BookingDao {
 
     @Override
     public Customer findCustomer(String customerId) {
-        return (Customer) em.createQuery("select customer from Customer as customer where customer.id = :customerId").setParameter("customerId", customerId).getSingleResult();
+        return (Customer) em.createQuery("select customer from Customer as customer where customer.customerID = :customerId").setParameter("customerId", customerId).getSingleResult();
     }
 }
