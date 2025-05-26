@@ -97,9 +97,4 @@ public class Client {
         reservationService.addReservation(new Reservation("12345", tableService.getTable("1"),
                 customerService.getCustomer("123"), LocalDate.now(), LocalTime.of(18, 0)));
     }
-
-    public static void info() {
-
-    }
-
 }
