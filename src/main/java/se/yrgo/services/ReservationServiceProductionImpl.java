@@ -51,6 +51,10 @@ public class ReservationServiceProductionImpl implements ReservationService{
         return dao.allReservationsForCustomer(reservationId);
     }
 
+    public void changeReservation(Reservation updatedReservation) {
+        dao.updateReservation(updatedReservation);
+    }
+
     // @Override
     // public List<Reservation> allReservationsForCustomer(String customerID) throws CustomerNotFoundException {
     //     //Before geting the list of reservations, we have to know if the customer excist.

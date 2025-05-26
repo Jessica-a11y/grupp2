@@ -67,7 +67,7 @@ public class BookingServiceProductionImp implements BookingService {
 
     @Override
     public void updateReservation(Reservation changedReservation) {
-        System.out.println("Updated! NOT!");
+        reservationService.changeReservation(changedReservation);
     }
     
 
