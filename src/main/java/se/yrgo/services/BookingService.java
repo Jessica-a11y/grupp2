@@ -11,12 +11,14 @@ import se.yrgo.domain.*;
 public interface BookingService {
 
     void addCustomer(Customer customer);
-    List<Customer> getAllCustomers();
     void addTable(Table table);
+    void addReservation(Reservation reservation) throws TableNotAvailableException;
+    
+    List<Customer> getAllCustomers();
     List<Table> getAllTables();
     List<Table> getAllAvailableTables();
-    void addReservation(Reservation reservation) throws TableNotAvailableException;
     List<Reservation> getAllReservations();
+    
     List<Reservation> allReservationsForTable(String tableId);
     List<Reservation> allReservationsForCustomer(String customerID) throws CustomerNotFoundException;
 

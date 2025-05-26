@@ -50,7 +50,7 @@ public class Client {
         try {
             setUp(service);
             LocalTime.now();
-            service.addReservation(new Reservation("9900", "1", "123", LocalDate.now(), LocalTime.of(18, 0)));
+            service.addReservation(new Reservation("9900", "109", "123", LocalDate.now(), LocalTime.of(18, 0)));
         } catch(TableNotAvailableException e) {
             System.out.println("Sorry, no table avaliable at this date and time.");
         } finally {

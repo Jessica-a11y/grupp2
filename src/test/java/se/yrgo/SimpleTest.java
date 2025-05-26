@@ -23,7 +23,7 @@ public class SimpleTest {
     @Test
     public void addCustomer() {
         service.addCustomer(new Customer("123", "John Doe", "doe.john@gmail.com", "0707080908"));
-        ArrayList<Customer> customerList = (ArrayList)service.getAllCustomers();
+        ArrayList<Customer> customerList = (ArrayList<Customer>) service.getAllCustomers();
         Customer theCustomer = customerList.get(0);
 
         assertEquals(theCustomer.getCustomerID(), "123", "Check if right id");
@@ -31,11 +31,42 @@ public class SimpleTest {
     }
 
     @Test
-    public void addTable() {
+    public void addTable(){
         Table newTable = new Table("1", 4, false);
         service.addTable(newTable);
     }
 
+    @Test
+    public void addReservation(){
+        Customer newCustomer = new Customer("123", "John Doe", "doe.john@gmail.com", "0707080908");
+        Table newTable = new Table("1", 4, false);
+        String tableId = String.valueOf(newTable.getId());
+
+        service.addCustomer(newCustomer);
+        service.addTable(newTable);
+
+        Reservation newReservation = new Reservation("r1", tableId, newCustomer.getCustomerID(), LocalDate.now(), LocalTime.of(18, 0));
+        
+        assertEquals(tableId, newReservation.getTableId());
+        assertEquals("123", newReservation.getCustomerId());
+
+        try {
+            service.addReservation(newReservation);
+        } catch (TableNotAvailableException e) {
+            System.err.println("Something went wrong with addReservation()");
+            System.err.println(e.getMessage());
+        }
+
+        ArrayList<Reservation> allReservation = (ArrayList<Reservation>) service.getAllReservations();
+        Reservation theReservationFromAbove = allReservation.get(0);
+
+        assertEquals("r1", theReservationFromAbove.getReservationId());
+    }
+
+    @Test
+    public void tableNotAvailableException(){
+        assertThrows(TableNotAvailableException.class, () -> service.addReservation(new Reservation("1", "1", "123", LocalDate.now(), LocalTime.of(18, 0))));
+    }
 
 
 
@@ -44,9 +75,5 @@ public class SimpleTest {
         assertThrows(CustomerNotFoundException.class, () -> service.allReservationsForCustomer("Appa"));
     }
     
-    @Test
-    public void tableNotAvailableException(){
-        assertThrows(TableNotAvailableException.class, () -> service.addReservation(new Reservation("1", "1", "123", LocalDate.now(), LocalTime.of(18, 0))));
-    }
 
 }
