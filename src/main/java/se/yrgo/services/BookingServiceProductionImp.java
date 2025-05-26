@@ -2,6 +2,7 @@ package se.yrgo.services;
 
 import java.util.*;
 
+import org.hibernate.transform.ToListResultTransformer;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -15,22 +16,14 @@ public class BookingServiceProductionImp implements BookingService {
     private TableService tableService;
     private ReservationService reservationService;
 
-    public BookingServiceProductionImp(CustomerService cs, TableService ts, ReservationService rs){
+    public BookingServiceProductionImp(CustomerService cs, TableService ts){
         this.customerService = cs;
         this. tableService = ts;
-        this.reservationService = rs;
     }
 
     @Override
-    public void makeReservation(Customer customer) {
-        Table tableToBook;
-        List<Table> tables = tableService.getAllAvailableTables();
-        for(Table t : tables) {
-            if(t.getAmountOfSeats() >= 5){
-                tableToBook = t;
-                break;
-            }
-        } 
+    public void makeReservation() {
+        System.out.println("Maybe we will make one");
        
 
         /*   Kontrollera att bordet är ledigt vid önskat datum/tid.
@@ -41,31 +34,23 @@ public class BookingServiceProductionImp implements BookingService {
     }
 
     @Override
-    public void changeReservation() {
-        
-    }
-
-    @Override
     public void deleteReservatuion() {
-        /* Ta bort eller markera bokningen som avbokad. */
+        System.out.println("We removed your reservation");
     }
 
     @Override
     public void findReservation() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'findReservation'");
+        System.out.println("Did we find it?");
     }
 
     @Override
     public void availableTables() {
-         // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'findReservation'");
+        System.out.println("Avaliable tables");
     }
 
     @Override
     public void updateReservation(Reservation changedReservation) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'updateReservation'");
+        System.out.println("Updated! NOT!");
     }
     
 

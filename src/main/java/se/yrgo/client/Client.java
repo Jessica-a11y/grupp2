@@ -22,15 +22,46 @@ public class Client {
         
         try {
             setUp(customerService, tableService);
+
+            try(Scanner input = new Scanner(System.in)){
+                introduction(input, service);
+            }
         } finally {
             container.close(); 
         }
     }
 
-    public void introduction() {
+    public static void introduction(Scanner input, BookingService service) {
         System.out.println("Welcome to the Restaurant Booking system.");
-        System.out.println("If you want to quit this program type 'close'.");
-        System.out.println("For more information type 'info' \n");
+        System.out.println("1. Make a reservation");
+        System.out.println("2. Find your reservation");
+        System.out.println("3. Cancel reservation");
+        System.out.println("4. Exit");
+        int option = input.nextInt();
+        navigation(option, service); 
+    }
+
+    public static void navigation(int action, BookingService service) {
+
+        switch (action) {
+            case 1:
+                service.makeReservation(new Customer(null, null, null, null));
+                break;
+
+            case 2:
+                service.findReservation();
+                break;
+
+            case 3:
+                service.deleteReservatuion();
+                break;
+
+            case 4:
+                
+                break;
+            default:
+                break;
+        }
     }
 
     public static void setUp(CustomerService customerService, TableService tableService) {
@@ -52,22 +83,6 @@ public class Client {
 
     }
 
-    public void navigation(String action) {
-
-        switch (action.toLowerCase()) {
-            case "find customer":
-
-                break;
-
-            case "find reservation":
-
-                break;
-            case "find table":
-
-                break;
-            default:
-                break;
-        }
-    }
+    
 
 }
