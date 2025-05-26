@@ -25,58 +25,44 @@ public class BookingServiceProductionImp implements BookingService {
     }
 
     @Override
-    public void makeReservation(String date, String time, int amoutOfSeats, String fullName, String email, String number) {
-        System.out.println("Maybe we will make one");
+    @Transactional(rollbackFor = {TableNotAvailableException.class, ReservationNotAvailable.class})
+    public void makeReservation(String date, String time, int amoutOfSeats, String fullName, String email, String number) throws TableNotAvailableException, ReservationNotAvailable{
+            checkForAvailableTimeAndDate(date, time);
+            DiningTable tableToBook = checkForAvailableDiningTable(amoutOfSeats);
+            Customer newCustomer = checkForAlreadyExcistingCustomer(fullName, email, number);
+            reservationService.addReservation(new Reservation("r4", tableToBook, newCustomer, LocalDate.parse(date), LocalTime.parse(time)));
+       
+    }
+
+    public void checkForAvailableTimeAndDate(String date, String time) throws ReservationNotAvailable {
         List<Reservation> allReservations = reservationService.getAllReservations();
         for(Reservation r : allReservations) {
-            if(r.getReservationDate() == LocalDate.parse(date) && r.getReservationTime() == LocalTime.parse(time)) {
-                System.out.println("Sorry, no table is available at this date and time");
-                break;
+            if((r.getReservationDate() == LocalDate.parse(date)) && (r.getReservationTime() == LocalTime.parse(time))) {
+                throw new ReservationNotAvailable();
             } 
         }
-        DiningTable tableToBook = new DiningTable();
+    }
+
+    public DiningTable checkForAvailableDiningTable(int amoutOfSeats) throws TableNotAvailableException{
         List<DiningTable> tableList = tableService.getAllAvailableTables();
         for(DiningTable dt : tableList) {
-            if(dt.getAmountOfSeats() == amoutOfSeats) {
-                tableToBook = dt;
-                break;
+            if(dt.getAmountOfSeats() >= amoutOfSeats) {
+                return dt;
             }
         }
+        throw new TableNotAvailableException(); 
+    }
 
-        Customer newCustomer = new Customer();
+    public Customer checkForAlreadyExcistingCustomer(String fullName, String email, String number) {
         List<Customer> customers = customerService.getAllCustomers();
         for(Customer c : customers) {
-            if(newCustomer.getName() != c.getName() && newCustomer.getEmail() != c.getEmail()) {
-                newCustomer = new Customer("12347", fullName, email, number);
-            }
-            else {
-                newCustomer = c;
-                break;
+            if((fullName == c.getName()) && (email == c.getEmail())) {
+                return c;
             }
         }
-        customerService.addCustomer(newCustomer);
-        
-
-       /*  Customer customer = customerService.getCustomer(customerId);
-        List<DiningTable> tableList = tableService.getAllAvailableTables();
-        
-        DiningTable table = tableList.get(0);
-
-        List<Reservation> allReservations = reservationService.getAllReservations();
-
-        tableService.noLongerAvailable(table.getTableNumber()); */
-
-
-        /*   Kontrollera att bordet är ledigt vid önskat datum/tid.
-            Kontrollera om kunden finns, annars skapa en ny kund.
-            Skapa reservation och länka till kund och bord.
-            Spara reservationen. */
-        
-        try {
-            reservationService.addReservation(new Reservation("r4", tableToBook, newCustomer, LocalDate.parse(date), LocalTime.parse(time)));
-        } catch (Exception e) {
-            // TODO: handle exception
-        }
+        Customer newCustomer = new Customer("14", fullName, email, number);
+        customerService.addCustomer(newCustomer); 
+        return newCustomer;
     }
 
     @Override
