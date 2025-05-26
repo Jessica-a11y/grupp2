@@ -20,11 +20,7 @@ public class Client {
         TableService tableService = container.getBean("tableService", TableService.class);
         
         try {
-            setUp(service);
-            LocalTime.now();
-            service.addReservation(new Reservation("9900", "1", "123", LocalDate.now(), LocalTime.of(18, 0)));
-        } catch(TableNotAvailableException e) {
-            System.out.println("Sorry, no table avaliable at this date and time.");
+            setUp(customerService, tableService);
         } finally {
             container.close(); 
         }
@@ -38,15 +34,17 @@ public class Client {
         System.out.println("For more information type 'info' \n");
     }
 
-    public static void setUp(BookingService service) {
-        service.addCustomer(new Customer("123", "John Doe", "doe.john@gmail.com", "0707080908"));
-        service.addCustomer(new Customer("124", "Anna Andersson", "anna@gmail.com", "0701234567"));
-        service.addCustomer(new Customer("125", "Bertil Bengtsson", "bertil@gmail.com", "0709876543"));
-        service.addCustomer(new Customer("126", "Cecilia Citron", "cecilia@gmail.com", "0706146846")); 
+    public static void setUp(CustomerService customerService, TableService tableService) {
+        customerService.addCustomer(new Customer("123", "John Doe", "doe.john@gmail.com", "0707080908"));
+        customerService.addCustomer(new Customer("124", "Anna Andersson", "anna@gmail.com", "0701234567"));
+        customerService.addCustomer(new Customer("125", "Bertil Bengtsson", "bertil@gmail.com", "0709876543"));
+        customerService.addCustomer(new Customer("126", "Cecilia Citron", "cecilia@gmail.com", "0706146846")); 
         
-        service.addTable(new Table("1", 4, true));
-        service.addTable(new Table("2", 2, true));
-        service.addTable(new Table("3", 6, true)); 
+        tableService.addTable(new Table("1", 4, true));
+        tableService.addTable(new Table("2", 2, true));
+        tableService.addTable(new Table("3", 6, true)); 
+
+        
     }
 
     public void info() {

@@ -22,17 +22,27 @@ public class BookingServiceProductionImp implements BookingService {
     }
 
     @Override
-    public void makeReservation() {
+    public void makeReservation(Customer customer) {
+        Table tableToBook;
+        List<Table> tables = tableService.getAllAvailableTables();
+        for(Table t : tables) {
+            if(t.getAmountOfSeats() >= 5){
+                tableToBook = t;
+                break;
+            }
+        } 
+       
+
         /*   Kontrollera att bordet är ledigt vid önskat datum/tid.
             Kontrollera om kunden finns, annars skapa en ny kund.
             Skapa reservation och länka till kund och bord.
             Spara reservationen. */
+        
     }
 
     @Override
     public void changeReservation() {
-        /* Hämta bokning och uppdatera tid, bord eller kundinformation.
-            Validera ändringar (t.ex. bordets tillgänglighet) */
+        
     }
 
     @Override
