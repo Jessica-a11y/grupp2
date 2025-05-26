@@ -19,7 +19,7 @@ public class BookingDaoJpaImpl implements BookingDao {
     private static final String SELECT_AVAILABLE_TABLES = "select table from Table as table where table.available = true";
     private static final String SELECT_ALL_RESERVATIONS = "select reservation from Reservation as reservation";
     private static final String SELECT_RESERVATIONS_FOR_TABLE = "select reservation from Reservation as reservation where reservation.tableId = :tableID";
-    private static final String SELECT_RESERVATIONS_FOR_CUSTOMER = "select reservation from Reservation as reservation where reservation.customerId = :customerID";
+    private static final String SELECT_RESERVATIONS_FOR_CUSTOMER = "select reservation from Reservation as reservation where reservation.reservationId = :reservationID";
 
     private static final String UPDATE_RESERVATION = "UPDATE Reservation as r SET r.tableId = :tableId, r.customerId = :customerId, r.reservationDate = :reservationDate, r.reservationTime = :reservationTime WHERE r.reservationId = :reservationId";
     private static final String UPDATE_CUSTOMER = "UPDATE Customer as c SET c.name = :name, c.email = :email, c.telephone = :telephone";
@@ -77,8 +77,8 @@ public class BookingDaoJpaImpl implements BookingDao {
 
     @Override
     @SuppressWarnings("unchecked")
-    public List<Reservation> allReservationsForCustomer(String customerID) {
-        return em.createQuery(SELECT_RESERVATIONS_FOR_CUSTOMER).setParameter("customerID", customerID).getResultList();
+    public List<Reservation> allReservationsForCustomer(String reservationId) {
+        return em.createQuery(SELECT_RESERVATIONS_FOR_CUSTOMER).setParameter("reservationID", reservationId).getResultList();
     }
 
     // Update
@@ -134,7 +134,12 @@ public class BookingDaoJpaImpl implements BookingDao {
     }
 
     @Override
-    public Table findTableById(String tableId) {
-        return (Table) em.createQuery("select table from Table as table where table.id = :tableId").setParameter("tableId", tableId).getSingleResult();
+    public Table findTableById(String tableNumber) {
+        return (Table) em.createQuery("select table from DiningTable as table where table.tableNumber = :tableNumber").setParameter("tableNumber", tableNumber).getSingleResult();
+    }
+
+    @Override
+    public Customer findCustomer(String customerId) {
+        return (Customer) em.createQuery("select customer from Customer as customer where customer.id = :customerId").setParameter("customerId", customerId).getSingleResult();
     }
 }

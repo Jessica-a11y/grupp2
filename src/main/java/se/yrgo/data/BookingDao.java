@@ -11,13 +11,15 @@ public interface BookingDao {
 
     //get by id
     public Table findTableById(String tableId);
+    public Customer findCustomer(String customerId);
+    
     //get all
     public List<Customer> allCustomers();
     public List<Table> allTables();
     public List<Reservation> allReservations();
     public List<Table> availableTables();
     public List<Reservation> allReservationsForTable(String tableId);
-    public List<Reservation> allReservationsForCustomer(String customerID); 
+    public List<Reservation> allReservationsForCustomer(String reservationId); 
 
     //Update
     public void updateReservation(Reservation changedReservation);

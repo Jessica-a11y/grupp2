@@ -10,5 +10,5 @@ public interface ReservationService {
     void addReservation(Reservation reservation) throws TableNotAvailableException;
     List<Reservation> getAllReservations();
     List<Reservation> allReservationsForTable(String tableId);
-    List<Reservation> allReservationsForCustomer(String customerID) throws CustomerNotFoundException;
+    List<Reservation> allReservationsForCustomer(String reservationId);
 } 

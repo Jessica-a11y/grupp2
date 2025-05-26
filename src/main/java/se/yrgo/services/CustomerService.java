@@ -5,7 +5,7 @@ import java.util.List;
 import se.yrgo.domain.Customer;
 
 public interface CustomerService {
-    void addCustomer(Customer customer);
-    List<Customer> getAllCustomers();
-    
+    public void addCustomer(Customer customer);
+    public List<Customer> getAllCustomers();
+    public Customer getCustomer(String customerID); 
 } 

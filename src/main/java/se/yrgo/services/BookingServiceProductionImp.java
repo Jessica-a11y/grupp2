@@ -39,8 +39,8 @@ public class BookingServiceProductionImp implements BookingService {
     }
 
     @Override
-    public void findReservation() {
-        System.out.println("Did we find it?");
+    public List<Reservation> findReservation(String reservationID) {
+        return reservationService.allReservationsForCustomer(reservationID);
     }
 
     @Override
