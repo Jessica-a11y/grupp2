@@ -36,5 +36,10 @@ public class TableServiceProductionImpl implements TableService{
     public List<DiningTable> getAllAvailableTables() {
         return dao.availableTables();
     }
+
+    @Override
+    public void noLongerAvailable(String tableNumber) {
+        dao.changeAvailability(tableNumber);
+    }
     
 }

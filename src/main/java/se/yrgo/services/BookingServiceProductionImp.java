@@ -23,25 +23,41 @@ public class BookingServiceProductionImp implements BookingService {
     }
 
     @Override
-    public void makeReservation() {
+    public void makeReservation(String customerId, LocalDate lD, LocalTime lT) {
         System.out.println("Maybe we will make one");
-       
+
+        Customer customer = customerService.getCustomer(customerId);
+        List<DiningTable> tableList = tableService.getAllAvailableTables();
+        
+        DiningTable table = tableList.get(0);
+
+        List<Reservation> allReservations = reservationService.getAllReservations();
+
+        tableService.noLongerAvailable(table.getTableNumber());
+
 
         /*   Kontrollera att bordet är ledigt vid önskat datum/tid.
             Kontrollera om kunden finns, annars skapa en ny kund.
             Skapa reservation och länka till kund och bord.
             Spara reservationen. */
         
+        Reservation newReservation = new Reservation();
+        
+        try {
+            reservationService.addReservation(newReservation);
+        } catch (Exception e) {
+            // TODO: handle exception
+        }
     }
 
     @Override
-    public void deleteReservatuion() {
-        System.out.println("We removed your reservation");
+    public void deleteReservatuion(String reservationId) {
+        reservationService.removeReservation(reservationId);
     }
 
     @Override
-    public List<Reservation> findReservation(String reservationID) {
-        return reservationService.allReservationsForCustomer(reservationID);
+    public Reservation findReservation(String reservationID) {
+        return reservationService.getReservation(reservationID);
     }
 
     @Override

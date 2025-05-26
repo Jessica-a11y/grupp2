@@ -9,10 +9,10 @@ import se.yrgo.domain.*;
  * Author Daniel Grahn, Jessica Olofsson
  */
 public interface BookingService {
-    public void makeReservation();
+    public void makeReservation(String customerId);
     public void updateReservation(Reservation changedReservation);
-    public void deleteReservatuion();
-    public List<Reservation> findReservation(String reservationID);
+    public void deleteReservatuion(String reservationId);
+    public Reservation findReservation(String reservationID);
     public void availableTables();
 
     //Få fram lediga tider: List<LocalDateTime>

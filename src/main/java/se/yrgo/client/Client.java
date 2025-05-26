@@ -49,7 +49,8 @@ public class Client {
 
         switch (option) {
             case 1:
-                service.makeReservation();
+                create(input, service);
+               // service.makeReservation();
                 break;
 
             case 2:
@@ -58,8 +59,7 @@ public class Client {
                 break;
 
             case 3:
-                service.deleteReservatuion();
-                System.out.println("The reservation has now been deleted");
+                cancel(input, service);
                 introduction(input, service);
                 break;
 
@@ -75,10 +75,46 @@ public class Client {
     private static void find(Scanner input, BookingService service) {
         System.out.println("What's your reservation number");
         String reservationID = input.nextLine();
-        List<Reservation> result = service.findReservation(reservationID);
-        for (Reservation r : result) {
-            System.out.println(r.info());
+        Reservation result = service.findReservation(reservationID);
+        System.out.println(result.info());
+    }
+
+    public static void cancel(Scanner input, BookingService service) {
+        System.out.println("What's your reservation number");
+        String reservationID = input.nextLine();
+        Reservation result = service.findReservation(reservationID);
+        System.out.println(result);
+        System.out.println("Would you like to cancel this reservation?");
+        String answer = input.nextLine();
+        switch (answer) {
+            case "yes":
+                service.deleteReservatuion(reservationID);
+                System.out.println("Reservation cancelled");
+                break;
+            case "no":
+                System.out.println("We see you in " + result.getReservationDate().getMonth() + " the " + result.getReservationDate().getDayOfMonth() + "th at " + result.getReservationTime());
+            default:
+                break;
         }
+        
+    }
+    
+
+    public static void create(Scanner input, BookingService service) {
+        
+       
+        //Vem är person vi söker 
+
+        // vilket bord ska personen ha (id)
+
+        // Tid och Datum för bokningen
+
+        //Generera ett reservationID som inte finns än
+
+        //är du nöjd?
+
+        //skicka
+        
     }
 
     public static void setUp(CustomerService customerService, TableService tableService,
@@ -95,5 +131,8 @@ public class Client {
         LocalTime.now();
         reservationService.addReservation(new Reservation("12345", tableService.getTable("1"),
                 customerService.getCustomer("123"), LocalDate.now(), LocalTime.of(18, 0)));
+
+        reservationService.addReservation(new Reservation("12346", tableService.getTable("2"),
+                customerService.getCustomer("124"), LocalDate.now(), LocalTime.of(20, 0)));
     }
 }
