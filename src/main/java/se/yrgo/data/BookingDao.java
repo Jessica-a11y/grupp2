@@ -8,6 +8,7 @@ public interface BookingDao {
     public void createReservation(Reservation newReservation);
     public void createCustomer(Customer newCustomer);
     public void createTable(Table newTable);
+    
     //get all
     public List<Customer> allCustomers();
     public List<Table> allTables();
@@ -15,4 +16,14 @@ public interface BookingDao {
     public List<Table> availableTables();
     public List<Reservation> allReservationsForTable(String tableId);
     public List<Reservation> allReservationsForCustomer(String customerID); 
+
+    //Update
+    public void updateReservation(Reservation changedReservation);
+    public void updateCustomer(Customer changedCustomer);
+    public void updateTable(Table changedTable);
+
+    //Delet
+    public void deletReservation(Reservation reservation);
+    public void deletCustomer(Customer customer);
+    public void deletTable(Table table);
 }

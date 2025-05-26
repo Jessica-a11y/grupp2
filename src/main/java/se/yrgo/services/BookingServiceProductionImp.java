@@ -73,4 +73,11 @@ public class BookingServiceProductionImp implements BookingService {
         throw new CustomerNotFoundException();
     }
 
+    @Override
+    public void updateReservation(Reservation changedReservation) {
+        dao.updateReservation(changedReservation);
+    }
+
+    
+
 }
