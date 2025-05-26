@@ -70,4 +70,9 @@ public class BookingDaoJpaImpl implements BookingDao{
     public List<Reservation> allReservationsForCustomer(String customerID) {
         return em.createQuery(SELECT_RESERVATIONS_FOR_CUSTOMER).setParameter("customerID", customerID).getResultList();
     }
+
+    @Override
+    public Table findTableById(String tableId) {
+        return (Table) em.createQuery("select table from Table as table where table.id = :tableId").setParameter("tableId", tableId).getSingleResult();
+    }
 }

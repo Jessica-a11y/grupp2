@@ -1,6 +1,8 @@
 package se.yrgo.client;
 
 import se.yrgo.services.BookingService;
+import se.yrgo.services.CustomerService;
+import se.yrgo.services.TableService;
 import se.yrgo.data.TableNotAvailableException;
 import se.yrgo.domain.*;
 import se.yrgo.domain.Table;
@@ -14,6 +16,8 @@ public class Client {
     public static void main(String[] args) {
         ClassPathXmlApplicationContext container = new ClassPathXmlApplicationContext("application.xml");
         BookingService service = container.getBean("bookingService", BookingService.class);
+        CustomerService customerService = container.getBean("customerService", CustomerService.class);
+        TableService tableService = container.getBean("tableService", TableService.class);
         
         try {
             setUp(service);

@@ -8,6 +8,9 @@ public interface BookingDao {
     public void createReservation(Reservation newReservation);
     public void createCustomer(Customer newCustomer);
     public void createTable(Table newTable);
+
+    //get by id
+    public Table findTableById(String tableId);
     //get all
     public List<Customer> allCustomers();
     public List<Table> allTables();

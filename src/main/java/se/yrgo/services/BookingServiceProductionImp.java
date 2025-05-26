@@ -11,66 +11,46 @@ import se.yrgo.domain.*;
 @Service("bookingService")
 @Transactional
 public class BookingServiceProductionImp implements BookingService {
-    private BookingDao dao;
+    private CustomerService customerService;
+    private TableService tableService;
+    private ReservationService reservationService;
 
-    public BookingServiceProductionImp(BookingDao dao) {
-        this.dao = dao;
+    public BookingServiceProductionImp(CustomerService cs, TableService ts, ReservationService rs){
+        this.customerService = cs;
+        this. tableService = ts;
+        this.reservationService = rs;
     }
 
     @Override
-    public void addCustomer(Customer customer) {
-        dao.createCustomer(customer);
+    public void makeReservation() {
+        /*   Kontrollera att bordet är ledigt vid önskat datum/tid.
+            Kontrollera om kunden finns, annars skapa en ny kund.
+            Skapa reservation och länka till kund och bord.
+            Spara reservationen. */
     }
 
     @Override
-    public List<Customer> getAllCustomers() {
-        return dao.allCustomers();
+    public void changeReservation() {
+        /* Hämta bokning och uppdatera tid, bord eller kundinformation.
+            Validera ändringar (t.ex. bordets tillgänglighet) */
     }
 
     @Override
-    public void addTable(Table table) {
-        dao.createTable(table);
+    public void deleteReservatuion() {
+        /* Ta bort eller markera bokningen som avbokad. */
     }
 
     @Override
-    public List<Table> getAllTables() {
-        return dao.allTables();
+    public void findReservation() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'findReservation'");
     }
 
     @Override
-    public List<Table> getAllAvailableTables() {
-        return dao.availableTables();
+    public void availableTables() {
+         // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'findReservation'");
     }
-
-    @Override
-    @Transactional(rollbackFor = TableNotAvailableException.class)
-    public void addReservation(Reservation reservation) throws TableNotAvailableException {
-        dao.createReservation(reservation);
-    }
-
-    @Override
-    public List<Reservation> getAllReservations() {
-        return dao.allReservations();
-    }
-
-    @Override
-    public List<Reservation> allReservationsForTable(String tableId) {
-        return dao.allReservationsForTable(tableId);
-    }
-
-    @Override
-    public List<Reservation> allReservationsForCustomer(String customerID) throws CustomerNotFoundException {
-        //Before geting the list of reservations, we have to know if the customer excist.
-        List<Customer> allCustomers = dao.allCustomers();
-
-        for (Customer customer : allCustomers) {
-            //System.out.println(customer.getName() + " " + customer.getCustomerID());
-            if(customer.getCustomerID().equals(customerID)){
-                return  dao.allReservationsForCustomer(customerID);
-            }
-        }
-
-        throw new CustomerNotFoundException();
-    }
+    
 
 }
