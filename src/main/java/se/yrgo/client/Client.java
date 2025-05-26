@@ -6,12 +6,11 @@ import se.yrgo.services.ReservationService;
 import se.yrgo.services.TableService;
 import se.yrgo.data.TableNotAvailableException;
 import se.yrgo.domain.*;
-import se.yrgo.domain.DiningTable;
-import se.yrgo.domain.Reservation;
 
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import java.util.*;
 import java.time.*;
+import java.time.format.DateTimeParseException;
 
 public class Client {
     public static void main(String[] args) {
@@ -49,7 +48,8 @@ public class Client {
 
         switch (option) {
             case 1:
-                service.makeReservation();
+                create(input, service);
+                // service.makeReservation();
                 break;
 
             case 2:
@@ -58,8 +58,7 @@ public class Client {
                 break;
 
             case 3:
-                service.deleteReservatuion();
-                System.out.println("The reservation has now been deleted");
+                cancel(input, service);
                 introduction(input, service);
                 break;
 
@@ -75,11 +74,80 @@ public class Client {
     private static void find(Scanner input, BookingService service) {
         System.out.println("What's your reservation number");
         String reservationID = input.nextLine();
-        List<Reservation> result = service.findReservation(reservationID);
-        for (Reservation r : result) {
-            System.out.println(r.info());
+        Reservation result = service.findReservation(reservationID);
+        System.out.println(result.info());
+    }
+
+    public static void cancel(Scanner input, BookingService service) {
+        System.out.println("What's your reservation number");
+        String reservationID = input.nextLine();
+        Reservation result = service.findReservation(reservationID);
+        System.out.println(result);
+        System.out.println("Would you like to cancel this reservation?");
+        String answer = input.nextLine();
+        switch (answer) {
+            case "yes":
+                service.deleteReservatuion(reservationID);
+                System.out.println("Reservation cancelled");
+                break;
+            case "no":
+                System.out.println("We see you in " + result.getReservationDate().getMonth() + " the "
+                        + result.getReservationDate().getDayOfMonth() + "th at " + result.getReservationTime());
+            default:
+                break;
+        }
+
+    }
+
+    public static void create(Scanner input, BookingService service) {
+        System.out.println("Who is the customer? Give the customerId:");
+        String customerId = input.nextLine(); // Läs hela raden direkt
+
+        // Tid och Datum för bokningen
+        LocalDate lD = null;
+        while (lD == null) {
+            System.out.println("Enter the date for the reservation (YYYY-MM-DD):");
+            try {
+                lD = LocalDate.parse(input.nextLine());
+            } catch (DateTimeParseException e) {
+                System.out.println("Invalid date format. Try again.");
+            }
+        }
+
+        LocalTime lT = null;
+        while (lT == null) {
+            System.out.println("Enter the time for the reservation (HH:MM):");
+            try {
+                lT = LocalTime.parse(input.nextLine());
+            } catch (DateTimeParseException e) {
+                System.out.println("Invalid time format. Try again.");
+            }
+        }
+
+        // Bekräfta bokningsinfo
+        System.out.println("\nReservation details:");
+        System.out.println("Customer ID: " + customerId);
+        System.out.println("Date: " + lD);
+        System.out.println("Time: " + lT);
+        System.out.println("Are you happy with this? (yes/no)");
+
+        String confirm = input.nextLine();
+        if (confirm.equalsIgnoreCase("yes")) {
+            service.makeReservation(customerId, lD, lT); // Om din metod kräver reservationId, säg till
+            System.out.println("Reservation created.");
+        } else {
+            System.out.println("Reservation cancelled.");
         }
     }
+
+
+
+    // // Bekräfta
+    // System.out.println("Reservation details:");
+    // System.out.println("Customer ID: " + customerId);
+    // System.out.println("Date: " + lD);
+    // System.out.println("Time: " + lT);
+    // System.out.println("Are you happy with this? (yes/no)");
 
     public static void setUp(CustomerService customerService, TableService tableService,
             ReservationService reservationService) throws TableNotAvailableException {
@@ -95,5 +163,8 @@ public class Client {
         LocalTime.now();
         reservationService.addReservation(new Reservation("12345", tableService.getTable("1"),
                 customerService.getCustomer("123"), LocalDate.now(), LocalTime.of(18, 0)));
+
+        reservationService.addReservation(new Reservation("12346", tableService.getTable("2"),
+                customerService.getCustomer("124"), LocalDate.now(), LocalTime.of(20, 0)));
     }
 }

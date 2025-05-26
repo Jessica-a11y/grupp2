@@ -27,6 +27,16 @@ public class ReservationServiceProductionImpl implements ReservationService{
     }
 
     @Override
+    public Reservation getReservation(String reservationId) {
+        return dao.findReservation(reservationId);
+    }
+
+    @Override
+    public void removeReservation(String reservationId) {
+        dao.deletReservation(reservationId);
+    }
+
+    @Override
     public List<Reservation> getAllReservations() {
         return dao.allReservations();
     }

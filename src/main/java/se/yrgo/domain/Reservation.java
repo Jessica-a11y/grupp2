@@ -69,7 +69,7 @@ public class Reservation{
 
     public String info() {
         return "Reservation:" +  
-                "\n\tName: " + customer.getName() + " - Email: " + customer.getEmail() + " - Phone number" + customer.getTelephone() +
+                "\n\tName: " + customer.getName() + " - Email: " + customer.getEmail() + " - Phone number: " + customer.getTelephone() +
                 "\n\tDate: " + reservationDate + 
                 "\n\tTime: " + reservationTime + "\n";
     }

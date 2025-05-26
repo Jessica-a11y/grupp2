@@ -12,6 +12,7 @@ public interface BookingDao {
     //get by id
     public DiningTable findTableById(String tableId);
     public Customer findCustomer(String customerId);
+    public Reservation findReservation(String reservationId);
     
     //get all
     public List<Customer> allCustomers();
@@ -25,9 +26,10 @@ public interface BookingDao {
     public void updateReservation(Reservation changedReservation);
     public void updateCustomer(Customer changedCustomer);
     public void updateTable(DiningTable changedTable);
+    public void changeAvailability(String tableNumber);
 
     //Delet
-    public void deletReservation(Reservation reservation);
+    public void deletReservation(String reservationId);
     public void deletCustomer(Customer customer);
     public void deletTable(DiningTable table);
 }
