@@ -133,4 +133,8 @@ public class BookingDaoJpaImpl implements BookingDao {
                 .executeUpdate();
     }
 
+    @Override
+    public Table findTableById(String tableId) {
+        return (Table) em.createQuery("select table from Table as table where table.id = :tableId").setParameter("tableId", tableId).getSingleResult();
+    }
 }
