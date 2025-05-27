@@ -15,11 +15,13 @@ import se.yrgo.domain.Reservation;
  * Production implementation of the {2link ReservationService} interface.
  * 
  * <p>
- * This service coordinates reservation management by delegating operations to the underlying {@link BookingDao}.
+ * This service coordinates reservation management by delegating operations to
+ * the underlying {@link BookingDao}.
  * </p>
  * 
  * <p>
- * Annotated as a Spring {@code @Service} and amrked as {@code @transactional} to ensure transactional integrity.
+ * Annotated as a Spring {@code @Service} and amrked as {@code @transactional}
+ * to ensure transactional integrity.
  * </p>
  * 
  * @author Daniel Grahn, Jessica Olofsson, for JavaDoc: Emilia Jarleback
@@ -27,11 +29,12 @@ import se.yrgo.domain.Reservation;
 
 @Service("reservationService")
 @Transactional
-public class ReservationServiceProductionImpl implements ReservationService{
+public class ReservationServiceProductionImpl implements ReservationService {
     private BookingDao dao;
 
     /**
-     * Constructs a new ReservationServiceProductionImpl with the specified BookingDao.
+     * Constructs a new ReservationServiceProductionImpl with the specified
+     * BookingDao.
      * 
      * @param dao The {@link BookingDao} used for reservation persistence operations
      */
@@ -133,7 +136,8 @@ public class ReservationServiceProductionImpl implements ReservationService{
      * {@inheritDoc}
      * 
      * <p>
-     * Updates an existing reservation with new information by delegating to the DAO layer.
+     * Updates an existing reservation with new information by delegating to the DAO
+     * layer.
      * </p>
      * 
      * @param updatedReservation Tyhe updated {@link Reservation} object
@@ -142,22 +146,23 @@ public class ReservationServiceProductionImpl implements ReservationService{
         dao.updateReservation(updatedReservation);
     }
 
-    //Commented code for checking if customer already exists before retrieving reservations
+    // Commented code for checking if customer already exists before retrieving
+    // reservations
     // @Override
-    // public List<Reservation> allReservationsForCustomer(String customerID) throws CustomerNotFoundException {
-    //     //Before geting the list of reservations, we have to know if the customer excist.
-    //     List<Customer> allCustomers = dao.allCustomers();
+    // public List<Reservation> allReservationsForCustomer(String customerID) throws
+    // CustomerNotFoundException {
+    // //Before geting the list of reservations, we have to know if the customer
+    // excist.
+    // List<Customer> allCustomers = dao.allCustomers();
 
-    //     for (Customer customer : allCustomers) {
-    //         //System.out.println(customer.getName() + " " + customer.getCustomerID());
-    //         if(customer.getCustomerID().equals(customerID)){
-    //             return  dao.allReservationsForCustomer(customerID);
-    //         }
-    //     }
-
-    //     throw new CustomerNotFoundException();
+    // for (Customer customer : allCustomers) {
+    // //System.out.println(customer.getName() + " " + customer.getCustomerID());
+    // if(customer.getCustomerID().equals(customerID)){
+    // return dao.allReservationsForCustomer(customerID);
+    // }
     // }
 
-    
-    
+    // throw new CustomerNotFoundException();
+    // }
+
 }

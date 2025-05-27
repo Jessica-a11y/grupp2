@@ -37,5 +37,5 @@ public interface CustomerService {
      * @param customerID The unique identifies of the customer
      * @return the {@link Customer} object of found, otherwise {@code null}
      */
-    public Customer getCustomer(String customerID); 
-} 
+    public Customer getCustomer(String customerID);
+}

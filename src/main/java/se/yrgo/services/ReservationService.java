@@ -22,7 +22,8 @@ public interface ReservationService {
      * Adds a new reservation to the system.
      * 
      * @param reservation The {@link Reservation} to add
-     * @throws TableNotAvaliableException if no suitable table is avaliable for the reservation
+     * @throws TableNotAvaliableException if no suitable table is avaliable for the
+     *                                    reservation
      */
     void addReservation(Reservation reservation) throws TableNotAvailableException;
 
@@ -44,7 +45,8 @@ public interface ReservationService {
     /**
      * Updates an existing reservation with new information.
      * 
-     * @param updateReservation The {@link Reservation} object containing updated information
+     * @param updateReservation The {@link Reservation} object containing updated
+     *                          information
      */
     public void changeReservation(Reservation updatedReservation);
 
@@ -67,7 +69,8 @@ public interface ReservationService {
      * Retrieves all reservations for a specific customer.
      * 
      * @param reservationId The unique identifier of the customer
-     * @return a {@link List} of {2link Reservation} objects for spe specified customer
+     * @return a {@link List} of {2link Reservation} objects for spe specified
+     *         customer
      */
     List<Reservation> allReservationsForCustomer(String reservationId);
-} 
+}

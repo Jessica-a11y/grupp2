@@ -58,9 +58,9 @@ public class DiningTable {
     /**
      * Constructs a new DiningTable with the specific details.
      * 
-     * @param tableNumber The unique table number
+     * @param tableNumber   The unique table number
      * @param amountofSeats The number of seats at the table
-     * @param avaliable The avaliability status of the table
+     * @param avaliable     The avaliability status of the table
      */
     public DiningTable(String tableNumber, int amountOfSeats, Boolean available) {
         this.tableNumber = tableNumber;

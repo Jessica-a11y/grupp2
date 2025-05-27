@@ -12,11 +12,13 @@ import se.yrgo.domain.DiningTable;
  * Production implementation of the {@link TableService} interface.
  * 
  * <p>
- * This service manages dining tables by delegating operations to the underlying {@link BookingDao}.
+ * This service manages dining tables by delegating operations to the underlying
+ * {@link BookingDao}.
  * </p>
  * 
  * <p>
- * Annotated as a Spring {@code @Service} and marked as {@code @Transactional} to ensure transactional integrity
+ * Annotated as a Spring {@code @Service} and marked as {@code @Transactional}
+ * to ensure transactional integrity
  * </p>
  * 
  * @author Daniel Grahn, Jessica Olofsson, for JavaDoc: Emilia Jarleback
@@ -24,7 +26,7 @@ import se.yrgo.domain.DiningTable;
 
 @Service("tableService")
 @Transactional
-public class TableServiceProductionImpl implements TableService{
+public class TableServiceProductionImpl implements TableService {
     private BookingDao dao;
 
     /**
@@ -100,11 +102,12 @@ public class TableServiceProductionImpl implements TableService{
      * Marks a table as no longer avaliable by delegating to the DAO layer.
      * </p>
      * 
-     * @param tableNumber The unique identifier or number of the table to mark as unavaliable
+     * @param tableNumber The unique identifier or number of the table to mark as
+     *                    unavaliable
      */
     @Override
     public void noLongerAvailable(String tableNumber) {
         dao.changeAvailability(tableNumber);
     }
-    
+
 }

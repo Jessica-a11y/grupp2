@@ -7,7 +7,8 @@ import se.yrgo.domain.*;
  * TableService provides operations for managing dining tables.
  * 
  * <p>
- * This interface allows adding new tables, retrieving tables by ID, listing all tables, listing avaliable tables
+ * This interface allows adding new tables, retrieving tables by ID, listing all
+ * tables, listing avaliable tables
  * and marking tables as unavaliable.
  * </p>
  * 
@@ -48,8 +49,9 @@ public interface TableService {
     /**
      * Marks a table as no longer avaliable for reservations.
      * 
-     * @param tableNumber The unique identifier or number of the table to mark as anavaliable
+     * @param tableNumber The unique identifier or number of the table to mark as
+     *                    anavaliable
      */
     public void noLongerAvailable(String tableNumber);
-    
-} 
+
+}

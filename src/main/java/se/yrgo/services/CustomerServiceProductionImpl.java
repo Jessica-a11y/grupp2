@@ -11,10 +11,12 @@ import se.yrgo.domain.Customer;
  * Production implementation of the {@link CustomerService} interface.
  * 
  * <p>
- * This service provides methods to manage customer by delegating operations to the underlying {@link BookingDao}.
+ * This service provides methods to manage customer by delegating operations to
+ * the underlying {@link BookingDao}.
  * </p>
  * <p>
- * Annotated as a Spring {@code @Service} ad amrked as {@code @Transactional} to ensure transactional integrity.
+ * Annotated as a Spring {@code @Service} ad amrked as {@code @Transactional} to
+ * ensure transactional integrity.
  * </p>
  * 
  * @author Daniel Grahn, Jessica Olofsson, for JavaDoc: Emilia Jarleback
@@ -22,7 +24,7 @@ import se.yrgo.domain.Customer;
 
 @Service("customerService")
 @Transactional
-public class CustomerServiceProductionImpl implements CustomerService{
+public class CustomerServiceProductionImpl implements CustomerService {
     private BookingDao dao;
 
     /**
@@ -43,7 +45,7 @@ public class CustomerServiceProductionImpl implements CustomerService{
      * 
      * @param customer The {@link Customer} to add
      */
-     @Override
+    @Override
     public void addCustomer(Customer customer) {
         dao.createCustomer(customer);
     }

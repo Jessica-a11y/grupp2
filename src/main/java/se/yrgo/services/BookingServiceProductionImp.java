@@ -13,7 +13,8 @@ import se.yrgo.domain.*;
  * Production implementation of the {@link BookingService} interface.
  * 
  * <p>
- * This service coordinates customer, table and reservation management to handle the full booking process for a restaurant.
+ * This service coordinates customer, table and reservation management to handle
+ * the full booking process for a restaurant.
  * </p>
  * 
  * <p>
@@ -37,7 +38,7 @@ public class BookingServiceProductionImp implements BookingService {
      * @param ts The table service to manage dining table data
      * @param rs The reservation service to manage reservation data
      */
-    public BookingServiceProductionImp(CustomerService cs, TableService ts, ReservationService rs){
+    public BookingServiceProductionImp(CustomerService cs, TableService ts, ReservationService rs) {
         this.customerService = cs;
         this.tableService = ts;
         this.reservationService = rs;
@@ -46,12 +47,13 @@ public class BookingServiceProductionImp implements BookingService {
     /**
      * {@inheritDoc}
      * <p>
-     * Creates a reservation by checking for avaliable time and date, finding a suitable table
+     * Creates a reservation by checking for avaliable time and date, finding a
+     * suitable table
      * and either retrievling or creating a customer.
      * </p>
      * 
      * @throws TableNotAvaliableException if no suitable table is avaliable
-     * @throws ReservationNotAvaliable of the reservation slot is already taken
+     * @throws ReservationNotAvaliable    of the reservation slot is already taken
      */
     @Override
     public void makeReservation(String date, String time, int amoutOfSeats, String fullName, String email,
@@ -87,13 +89,14 @@ public class BookingServiceProductionImp implements BookingService {
     }
 
     /**
-     * Finds an avaliable dining table that can accomodate the specified number of seats.
+     * Finds an avaliable dining table that can accomodate the specified number of
+     * seats.
      * 
      * @param amountOfSeats the required number of seats
      * @return a suitable {@link DiningTable}
      * @throws TableNotAvaliableException if no suitable table is fund
      */
-    public DiningTable checkForAvailableDiningTable(int amoutOfSeats) throws TableNotAvailableException{
+    public DiningTable checkForAvailableDiningTable(int amoutOfSeats) throws TableNotAvailableException {
         List<DiningTable> tableList = tableService.getAllAvailableTables();
         for (DiningTable dt : tableList) {
             if (dt.getAmountOfSeats() >= amoutOfSeats) {
@@ -108,8 +111,8 @@ public class BookingServiceProductionImp implements BookingService {
      * If not, creates and adds a new customer.
      * 
      * @param fullName The customer's full name
-     * @param email The customer's email address
-     * @param number The customer's phone number
+     * @param email    The customer's email address
+     * @param number   The customer's phone number
      * @return the existing or newly created {@link Customer}
      */
     public Customer checkForAlreadyExcistingCustomer(String fullName, String email, String number) {
@@ -152,11 +155,13 @@ public class BookingServiceProductionImp implements BookingService {
     public Reservation findReservation(String reservationID) {
         return reservationService.getReservation(reservationID);
     }
+
     /**
      * {@inheritDoc}
      * 
      * <p>
-     * Displayes avaliable tables. The current implementation prints a message to the console.
+     * Displayes avaliable tables. The current implementation prints a message to
+     * the console.
      * </p>
      */
     @Override
@@ -177,8 +182,22 @@ public class BookingServiceProductionImp implements BookingService {
     public void updateReservation(Reservation changedReservation) {
         reservationService.changeReservation(changedReservation);
     }
-    
-    
+
+    /**
+     * Updates the date and time of an existing reservation.
+     * 
+     * <p>
+     * Retrieves the reservation with the specified ID, updates its date and time
+     * and persists the changes. If the reservation is not found, an
+     * {@link IllegalArgumentException} is thrown.
+     * </p>
+     * 
+     * @param reservationId The unique identifier of the reservation to update
+     * @param date          The new reservation date (format: "yyyy-MM-dd")
+     * @param time          The new reservation time (format: "HH:mm")
+     * @throws IllegalArgumentsException if no reservation is found with the
+     *                                   specified ID
+     */
     @Override
     public void updateReservation(String reservationId, String date, String time) {
         Reservation result = reservationService.getReservation(reservationId);
@@ -192,4 +211,3 @@ public class BookingServiceProductionImp implements BookingService {
     }
 
 }
-
