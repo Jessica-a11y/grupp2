@@ -14,10 +14,11 @@ public class BookingDaoJpaImpl implements BookingDao {
     @PersistenceContext
     private EntityManager em;
 
+    private static final String SELECT_ALL_RESERVATIONS = "select reservation from Reservation as reservation";
     private static final String SELECT_ALL_CUSTOMERS = "select customer from Customer as customer";
     private static final String SELECT_ALL_TABLES = "select table from DiningTable as table";
+    
     private static final String SELECT_AVAILABLE_TABLES = "select table from DiningTable as table where table.available = true";
-    private static final String SELECT_ALL_RESERVATIONS = "select reservation from Reservation as reservation";
     private static final String SELECT_RESERVATIONS_FOR_TABLE = "select reservation from Reservation as reservation where reservation.tableId = :tableID";
     private static final String SELECT_RESERVATIONS_FOR_CUSTOMER = "select reservation from Reservation as reservation where reservation.reservationId = :reservationID";
 
@@ -113,14 +114,17 @@ public class BookingDaoJpaImpl implements BookingDao {
 
     // Delet
     @Override
-    public void deletReservation(Reservation reservation) {
+    public void deletReservation(String reservationId) {
+        // em.createQuery(DELET_RESERVATION).setParameter("reservationId", reservationId);
         em.createQuery(DELET_RESERVATION)
-                .setParameter("reservationId", reservation.getReservationId())
+                .setParameter("reservationId", reservationId)
                 .executeUpdate();
     }
 
     @Override
     public void deletCustomer(Customer customer) {
+        // em.remove(customer.getId());
+
         em.createQuery(DELET_CUSTOMER)
                 .setParameter("customerID", customer.getCustomerID())
                 .executeUpdate();
@@ -128,6 +132,8 @@ public class BookingDaoJpaImpl implements BookingDao {
 
     @Override
     public void deletTable(DiningTable table) {
+        // em.remove(table.getId());
+
         em.createQuery(DELET_Table)
                 .setParameter("tableNumber", table.getTableNumber())
                 .executeUpdate();
@@ -141,5 +147,15 @@ public class BookingDaoJpaImpl implements BookingDao {
     @Override
     public Customer findCustomer(String customerId) {
         return (Customer) em.createQuery("select customer from Customer as customer where customer.customerID = :customerId").setParameter("customerId", customerId).getSingleResult();
+    }
+
+    @Override
+    public Reservation findReservation(String reservationId) {
+        return (Reservation) em.createQuery("select reservation from Reservation as reservation where reservation.reservationId = :reservationId").setParameter("reservationId", reservationId).getSingleResult();
+    }
+
+    @Override
+    public void changeAvailability(String tableNumber) {
+        em.createQuery("UPDATE DiningTable as t SET t.available = false where t.tableNumber = :tableNumber").setParameter("tableNumber", tableNumber).executeUpdate();
     }
 }

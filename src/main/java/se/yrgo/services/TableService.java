@@ -8,5 +8,6 @@ public interface TableService {
     DiningTable getTable(String tableId);
     List<DiningTable> getAllTables();
     List<DiningTable> getAllAvailableTables();
+    public void noLongerAvailable(String tableNumber);
     
 } 

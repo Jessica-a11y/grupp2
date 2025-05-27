@@ -23,97 +23,116 @@ public class SimpleBookingServiceTest {
 
     @Test
     public void makeReservation() {
+        Customer newCustomer = new Customer("C1", "John Doe", "doe.john@gmail.com", "0707080908");
+        DiningTable newTable = new DiningTable("T1", 4, true);
+        customerService.addCustomer(newCustomer);
+        tableService.addTable(newTable);
 
-        // service.addCustomer(new Customer("123", "John Doe", "doe.john@gmail.com",
-        // "0707080908"));
-        // ArrayList<Customer> customerList = (ArrayList<Customer>)
-        // service.getAllCustomers();
-        // Customer theCustomer = customerList.get(0);
+        assertEquals(0, reservationService.getAllReservations().size());
 
-        // assertEquals(theCustomer.getCustomerID(), "123", "Check if right id");
-        // assertEquals(theCustomer.getName(), "John Doe", "Check if the name is
-        // right");
+        // This must be a valid soulution
+        try {
+            service.makeReservation("2025-05-30", "18:30", 4, "Daniel Gran", "denGryme@gamil.com", "0000000000");
+            System.out.println(reservationService.getAllReservations().size());
+        } catch (Exception e) {
+            // TODO: handle exception
+        }
+
+        assertEquals(1, reservationService.getAllReservations().size());
+
+        assertThrows(TableNotAvailableException.class,
+                () -> service.makeReservation("2025-04-30", "18:30", 10, "Noel", "denGryme@gamil.com", "0000000000"));
     }
 
     @Test
     public void updateReservation() {
-        // Table newTable = new Table("1", 4, false);
-        // service.addTable(newTable);
+        Customer newCustomer = new Customer("C1", "John Doe", "doe.john@gmail.com", "0707080908");
+        DiningTable newTable = new DiningTable("T1", 4, true);
+        customerService.addCustomer(newCustomer);
+        tableService.addTable(newTable);
+        assertEquals(0, reservationService.getAllReservations().size());
+
+        Reservation Reservation = new Reservation("R1", newTable, newCustomer, LocalDate.parse("2025-05-30"),
+                LocalTime.parse("20:00"));
+        try {
+            reservationService.addReservation(Reservation);
+        } catch (Exception e) {
+            // TODO: handle exception
+        }
+        assertEquals(1, reservationService.getAllReservations().size());
+
+        Reservation updatedReservation = new Reservation("R1", newTable, newCustomer, LocalDate.parse("2024-01-20"),
+                LocalTime.parse("18:30"));
+        service.updateReservation(updatedReservation);
+        assertEquals(1, reservationService.getAllReservations().size());
     }
 
     @Test
     public void deleteReservatuion() {
-        // Customer newCustomer = new Customer("123", "John Doe", "doe.john@gmail.com",
-        // "0707080908");
-        // Table newTable = new Table("1", 4, false);
-        // String tableId = String.valueOf(newTable.getId());
+        Customer newCustomer = new Customer("C1", "John Doe", "doe.john@gmail.com", "0707080908");
+        DiningTable newTable = new DiningTable("T1", 4, true);
+        Reservation newReservation = new Reservation("R1", newTable, newCustomer, LocalDate.parse("2024-01-20"),
+                LocalTime.parse("18:30"));
+        customerService.addCustomer(newCustomer);
+        tableService.addTable(newTable);
+        assertEquals(0, reservationService.getAllReservations().size());
 
-        // service.addCustomer(newCustomer);
-        // service.addTable(newTable);
+        try {
+            reservationService.addReservation(newReservation);
+        } catch (Exception e) {
+            // TODO: handle exception
+        }
+        assertEquals(1, reservationService.getAllReservations().size());
 
-        // Reservation newReservation = new Reservation("r1", tableId,
-        // newCustomer.getCustomerID(), LocalDate.now(), LocalTime.of(18, 0));
+        // There is no reservation with a reservationId named R0
+        service.deleteReservatuion("R0");
+        assertEquals(1, reservationService.getAllReservations().size());
 
-        // assertEquals(tableId, newReservation.getTableId());
-        // assertEquals("123", newReservation.getCustomerId());
-
-        // try {
-        // service.addReservation(newReservation);
-        // } catch (TableNotAvailableException e) {
-        // System.err.println("Something went wrong with addReservation()");
-        // System.err.println(e.getMessage());
-        // }
-
-        // ArrayList<Reservation> allReservation = (ArrayList<Reservation>)
-        // service.getAllReservations();
-        // Reservation theReservationFromAbove = allReservation.get(0);
-
-        // assertEquals("r1", theReservationFromAbove.getReservationId());
+        service.deleteReservatuion("R1");
+        assertEquals(0, reservationService.getAllReservations().size());
     }
 
     @Test
     public void findReservation() {
-        Customer customer = new Customer("c1", "John Doe", "doe.john@gmail.com", "0707080908");
-        DiningTable table = new DiningTable("t1", 4, true);
+        Customer customer = new Customer("C1", "John Doe", "doe.john@gmail.com","0707080908");
+        DiningTable table = new DiningTable("T1", 4, true);
+        Reservation reservation = new Reservation("R1", table, customer, LocalDate.now(), LocalTime.of(18, 0));
+        assertEquals(0, reservationService.getAllReservations().size(), "there should be no new reservation");
 
         customerService.addCustomer(customer);
         tableService.addTable(table);
-
-        Reservation reservation = new Reservation("r1", table, customer, LocalDate.now(), LocalTime.of(18, 0));
-        
-        ArrayList<Reservation> firstReservationList = (ArrayList<Reservation>) service.findReservation("r1");
-        assertEquals(0, firstReservationList.size(),"no new reservation but it eather 0 (it should be null)");
-       
         try {
             reservationService.addReservation(reservation);
         } catch (Exception e) {
-            
+            // TODO: handle exception
         }
+        assertEquals(1, reservationService.getAllReservations().size(), "there should be 1 new reservation");
 
-        ArrayList<Reservation> reservationsList = (ArrayList<Reservation>) service.findReservation("r1");
-        assertEquals(1, reservationsList.size(),"one new reservation");
+
+       
+        Reservation foundReservation = service.findReservation("R1");
         
-        Reservation theReservation = reservationsList.get(0);
 
-        assertEquals("r1", theReservation.getReservationId());
-        assertEquals("c1", theReservation.getCustomer().getCustomerID());
-
+        assertEquals("R1", foundReservation.getReservationId());
+        assertEquals("T1", foundReservation.getTable().getTableNumber());
+        assertEquals("C1", foundReservation.getCustomer().getCustomerID());
     }
 
+    //This is not implementet yet, but this function excits in the TableService
+    @Test
     public void availableTables() {
+        DiningTable table1 = new DiningTable("T1", 3, true);
+        DiningTable table2 = new DiningTable("T2", 4, false);
+        DiningTable table3 = new DiningTable("T3", 6, true);
+        DiningTable table4 = new DiningTable("T4", 8, true);
+        DiningTable table5 = new DiningTable("T5", 9, false);
 
+        tableService.addTable(table1);
+        tableService.addTable(table2);
+        tableService.addTable(table3);
+        tableService.addTable(table4);
+        tableService.addTable(table5);
+
+        assertEquals(3, tableService.getAllAvailableTables().size());
     }
-    // @Test
-    // public void tableNotAvailableException(){
-    // assertThrows(TableNotAvailableException.class, () ->
-    // service.addReservation(new Reservation("1", "1", "123", LocalDate.now(),
-    // LocalTime.of(18, 0))));
-    // }
-
-    // @Test
-    // public void customerNotFoundException(){
-    // assertThrows(CustomerNotFoundException.class, () ->
-    // service.allReservationsForCustomer("Appa"));
-    // }
-
 }
