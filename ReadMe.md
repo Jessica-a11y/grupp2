@@ -57,7 +57,11 @@ The project was developed using a combination of individual and mob programming.
 git clone https://github.com/Jessica-a11y/grupp2.git
 cd grupp2
 ```
-2. Build and Run the project with the following script: 
+2. Make the run.sh executable: 
+```
+chmod u+x run.sh
+```
+3. Build and Run the project with the following script: 
 ```
 ./run.sh 
 ```
