@@ -36,7 +36,7 @@ public interface BookingService {
      * 
      * @param changedReservation The reservation object containing the updated information
      */
-    public void updateReservation(Reservation changedReservation);
+    public void updateReservation(String reservationId, String date, String time);
     
     /**
      * Deletes a reservation with the specified ID.

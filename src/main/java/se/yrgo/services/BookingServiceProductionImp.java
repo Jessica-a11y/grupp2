@@ -174,12 +174,6 @@ public class BookingServiceProductionImp implements BookingService {
      * @param changedReservation The updated reservation object
      */
     @Override
-    public void updateReservation(Reservation changedReservation) {
-        reservationService.changeReservation(changedReservation);
-    }
-    
-    
-    @Override
     public void updateReservation(String reservationId, String date, String time) {
         Reservation result = reservationService.getReservation(reservationId);
         if (result != null) {
