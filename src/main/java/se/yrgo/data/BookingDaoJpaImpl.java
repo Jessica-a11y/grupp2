@@ -22,7 +22,7 @@ public class BookingDaoJpaImpl implements BookingDao {
     private static final String SELECT_RESERVATIONS_FOR_TABLE = "select reservation from Reservation as reservation where reservation.tableId = :tableID";
     private static final String SELECT_RESERVATIONS_FOR_CUSTOMER = "select reservation from Reservation as reservation where reservation.reservationId = :reservationID";
 
-    private static final String UPDATE_RESERVATION = "UPDATE Reservation as r SET r.tableId = :tableId, r.customerId = :customerId, r.reservationDate = :reservationDate, r.reservationTime = :reservationTime WHERE r.reservationId = :reservationId";
+    private static final String UPDATE_RESERVATION = "UPDATE Reservation as r SET r.reservationDate = :reservationDate, r.reservationTime = :reservationTime WHERE r.reservationId = :reservationId";
     private static final String UPDATE_CUSTOMER = "UPDATE Customer as c SET c.name = :name, c.email = :email, c.telephone = :telephone";
     private static final String UPDATE_Table = "UPDATE DiningTable as t SET t.amountOfSeats = :amountOfSeats, t.available = :available WHERE t.tableNumber = :tableNumber";
 
@@ -86,8 +86,6 @@ public class BookingDaoJpaImpl implements BookingDao {
     @Override
     public void updateReservation(Reservation changedReservation) {
         em.createNativeQuery(UPDATE_RESERVATION)
-                .setParameter("tableId", changedReservation.getTable().getTableNumber())
-                .setParameter("customerId", changedReservation.getCustomer().getCustomerID())
                 .setParameter("reservationDate", changedReservation.getReservationDate())
                 .setParameter("reservationTime", changedReservation.getReservationTime())
                 .setParameter("reservationId", changedReservation.getReservationId())
