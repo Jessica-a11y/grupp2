@@ -3,11 +3,7 @@ package se.yrgo.services;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.*;
-<<<<<<< HEAD
-=======
 
-//import org.hibernate.transform.ToListResultTransformer;
->>>>>>> javadoc
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import se.yrgo.data.*;
@@ -24,7 +20,7 @@ import se.yrgo.domain.*;
  * This class is annotated as a Spring {@code @Service} and is transactional.
  * </p>
  * 
- * @author Daniel Grahn, Jessica Olofsson
+ * @author Daniel Grahn, Jessica Olofsson, for JavaDoc: Emilia Jarleack
  */
 
 @Service("bookingService")
@@ -34,9 +30,6 @@ public class BookingServiceProductionImp implements BookingService {
     private TableService tableService;
     private ReservationService reservationService;
 
-<<<<<<< HEAD
-    public BookingServiceProductionImp(CustomerService cs, TableService ts, ReservationService rs) {
-=======
     /**
      * Constructs a new BookingServiceProductionImp with the required dependencies
      * 
@@ -45,7 +38,6 @@ public class BookingServiceProductionImp implements BookingService {
      * @param rs The reservation service to manage reservation data
      */
     public BookingServiceProductionImp(CustomerService cs, TableService ts, ReservationService rs){
->>>>>>> javadoc
         this.customerService = cs;
         this.tableService = ts;
         this.reservationService = rs;
@@ -94,9 +86,6 @@ public class BookingServiceProductionImp implements BookingService {
         }
     }
 
-<<<<<<< HEAD
-    public DiningTable checkForAvailableDiningTable(int amoutOfSeats) throws TableNotAvailableException {
-=======
     /**
      * Finds an avaliable dining table that can accomodate the specified number of seats.
      * 
@@ -105,7 +94,6 @@ public class BookingServiceProductionImp implements BookingService {
      * @throws TableNotAvaliableException if no suitable table is fund
      */
     public DiningTable checkForAvailableDiningTable(int amoutOfSeats) throws TableNotAvailableException{
->>>>>>> javadoc
         List<DiningTable> tableList = tableService.getAllAvailableTables();
         for (DiningTable dt : tableList) {
             if (dt.getAmountOfSeats() >= amoutOfSeats) {
@@ -135,9 +123,6 @@ public class BookingServiceProductionImp implements BookingService {
         customerService.addCustomer(newCustomer);
         return newCustomer;
     }
-<<<<<<< HEAD
-    
-=======
 
     /**
      * {@inheritDoc}
@@ -148,7 +133,6 @@ public class BookingServiceProductionImp implements BookingService {
      * 
      * @param reservationId The ID of the reservation to delete
      */
->>>>>>> javadoc
     @Override
     public void deleteReservatuion(String reservationId) {
         reservationService.removeReservation(reservationId);
@@ -168,9 +152,6 @@ public class BookingServiceProductionImp implements BookingService {
     public Reservation findReservation(String reservationID) {
         return reservationService.getReservation(reservationID);
     }
-<<<<<<< HEAD
-=======
-
     /**
      * {@inheritDoc}
      * 
@@ -196,7 +177,6 @@ public class BookingServiceProductionImp implements BookingService {
     public void updateReservation(Reservation changedReservation) {
         reservationService.changeReservation(changedReservation);
     }
->>>>>>> javadoc
     
     
     @Override
@@ -212,3 +192,4 @@ public class BookingServiceProductionImp implements BookingService {
     }
 
 }
+

@@ -12,7 +12,7 @@ import se.yrgo.domain.Customer;
  * and fetching a specific customer by their unique ID.
  * </p>
  * 
- * @author Daniel Grahn, Jessica Olofsson
+ * @author Daniel Grahn, Jessica Olofsson, for JavaDoc: Emilia Jarleback
  */
 
 public interface CustomerService {

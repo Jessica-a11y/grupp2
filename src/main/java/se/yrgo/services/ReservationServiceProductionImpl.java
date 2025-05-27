@@ -6,13 +6,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import se.yrgo.data.BookingDao;
-<<<<<<< HEAD
+
 import se.yrgo.data.TableNotAvailableException;
-=======
-//import se.yrgo.data.CustomerNotFoundException;
-import se.yrgo.data.TableNotAvailableException;
-//import se.yrgo.domain.Customer;
->>>>>>> javadoc
+
 import se.yrgo.domain.Reservation;
 
 /**

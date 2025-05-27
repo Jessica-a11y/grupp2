@@ -1,11 +1,5 @@
 package se.yrgo.services;
 
-<<<<<<< HEAD
-=======
-//import java.util.List;
-
-//import se.yrgo.data.CustomerNotFoundException;
->>>>>>> javadoc
 import se.yrgo.data.ReservationNotAvailable;
 import se.yrgo.data.TableNotAvailableException;
 import se.yrgo.domain.*;
@@ -18,16 +12,10 @@ import se.yrgo.domain.*;
  * as well as displaying avaliable tables.
  * </p>
  * 
- * @author Daniel Grahn, Jessica Olofsson
+ * @author Daniel Grahn, Jessica Olofsson, for JavaDoc: Emilia Jarleback
  */
 
 public interface BookingService {
-<<<<<<< HEAD
-    void makeReservation(String date, String time, int amountOfSeats, String fullName, String email, String number) throws TableNotAvailableException, ReservationNotAvailable;
-    void updateReservation(String reservationId, String date, String time);
-    void deleteReservatuion(String reservationId);
-    Reservation findReservation(String reservationID);
-=======
 
     /**
      * Creates a new table reservation.
@@ -75,8 +63,4 @@ public interface BookingService {
     public void availableTables();
 
     //Få fram lediga tider: List<LocalDateTime>
-
-    
-   
->>>>>>> javadoc
 }

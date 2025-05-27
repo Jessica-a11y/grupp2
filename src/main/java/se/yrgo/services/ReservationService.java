@@ -2,10 +2,6 @@ package se.yrgo.services;
 
 import java.util.List;
 
-<<<<<<< HEAD
-=======
-//import se.yrgo.data.CustomerNotFoundException;
->>>>>>> javadoc
 import se.yrgo.data.TableNotAvailableException;
 import se.yrgo.domain.Reservation;
 
@@ -17,7 +13,7 @@ import se.yrgo.domain.Reservation;
  * as well as retrieving reervations by table or customer.
  * </p>
  * 
- * @author Daniel Grahn, Jessica Olofsson
+ * @author Daniel Grahn, Jessica Olofsson, for JavaDoc: Emilia Jarleback
  */
 
 public interface ReservationService {

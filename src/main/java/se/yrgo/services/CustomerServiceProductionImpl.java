@@ -17,7 +17,7 @@ import se.yrgo.domain.Customer;
  * Annotated as a Spring {@code @Service} ad amrked as {@code @Transactional} to ensure transactional integrity.
  * </p>
  * 
- * @author Daniel Grahn, Jessica Olofsson
+ * @author Daniel Grahn, Jessica Olofsson, for JavaDoc: Emilia Jarleback
  */
 
 @Service("customerService")
