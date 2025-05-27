@@ -16,7 +16,7 @@ import java.time.*;
 
 public class Client {
     public static void main(String[] args) {
-        ClassPathXmlApplicationContext container = new ClassPathXmlApplicationContext("application.xml");
+        ClassPathXmlApplicationContext container = new ClassPathXmlApplicationContext("application.xml"); //Här
         BookingService service = container.getBean("bookingService", BookingService.class);
         CustomerService customerService = container.getBean("customerService", CustomerService.class);
         TableService tableService = container.getBean("tableService", TableService.class);
