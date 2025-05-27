@@ -1,23 +1,27 @@
-#!/bin/bash
+l#!/bin/bash
 set -e
 
-echo "🔄 Rensar tidigare byggen..."
+echo "Cleaning previous builds..."
 mvn clean
 
-echo "📦 Paketerar projektet..."
+echo "Packaging the project..."
 mvn package
 
-echo "🧪 Kör tester..."
+echo "Running tests..."
 mvn test
 
-# Leta upp JAR-filen i ./target
+# Find the JAR file in ./target
 JAR_FILE=$(find ./target -type f -name "*.jar" | head -n 1)
 
 if [[ ! -f "$JAR_FILE" ]]; then
-    echo "❌ Ingen JAR-fil hittades i ./target/"
+    echo "No JAR file found in ./target/"
     exit 1
 fi
 
-echo "✅ JAR-fil skapad: $JAR_FILE"
+echo "JAR file created: $JAR_FILE"
+
+echo "Now running the code..."
+mvn exec:java -Dexec.mainClass="se.yrgo.client.Client"
+
 
 
