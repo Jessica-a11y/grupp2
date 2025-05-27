@@ -56,11 +56,10 @@ public class BookingServiceProductionImp implements BookingService {
      * @throws ReservationNotAvaliable    of the reservation slot is already taken
      */
     @Override
-    public void makeReservation(String date, String time, int amoutOfSeats, String fullName, String email,
-            String number) throws TableNotAvailableException, ReservationNotAvailable {
+    public void makeReservation(String date, String time, int amountOfSeats, String fullName, String email, String number) throws TableNotAvailableException, ReservationNotAvailable {
         try {
             checkForAvailableTimeAndDate(date, time);
-            DiningTable tableToBook = checkForAvailableDiningTable(amoutOfSeats);
+            DiningTable tableToBook = checkForAvailableDiningTable(amountOfSeats);
             Customer newCustomer = checkForAlreadyExcistingCustomer(fullName, email, number);
             reservationService.addReservation(new Reservation("r4", tableToBook, newCustomer, LocalDate.parse(date), LocalTime.parse(time)));
         } catch (TableNotAvailableException e) {
