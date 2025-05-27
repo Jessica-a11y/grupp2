@@ -62,8 +62,7 @@ public class BookingServiceProductionImp implements BookingService {
             checkForAvailableTimeAndDate(date, time);
             DiningTable tableToBook = checkForAvailableDiningTable(amoutOfSeats);
             Customer newCustomer = checkForAlreadyExcistingCustomer(fullName, email, number);
-            reservationService.addReservation(
-                    new Reservation("r4", tableToBook, newCustomer, LocalDate.parse(date), LocalTime.parse(time)));
+            reservationService.addReservation(new Reservation("r4", tableToBook, newCustomer, LocalDate.parse(date), LocalTime.parse(time)));
         } catch (TableNotAvailableException e) {
             throw new TableNotAvailableException();
         } catch (ReservationNotAvailable ex) {
