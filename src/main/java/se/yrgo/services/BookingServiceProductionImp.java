@@ -1,5 +1,7 @@
 package se.yrgo.services;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.*;
 
 import org.hibernate.transform.ToListResultTransformer;
@@ -23,25 +25,58 @@ public class BookingServiceProductionImp implements BookingService {
     }
 
     @Override
-    public void makeReservation() {
-        System.out.println("Maybe we will make one");
-       
+    public void makeReservation(String date, String time, int amoutOfSeats, String fullName, String email, String number) throws TableNotAvailableException, ReservationNotAvailable{
+            try {
+                checkForAvailableTimeAndDate(date, time);
+                DiningTable tableToBook = checkForAvailableDiningTable(amoutOfSeats);
+                Customer newCustomer = checkForAlreadyExcistingCustomer(fullName, email, number);
+                reservationService.addReservation(new Reservation("r4", tableToBook, newCustomer, LocalDate.parse(date), LocalTime.parse(time)));
+            } catch(TableNotAvailableException e) {
+                throw new TableNotAvailableException();
+            }catch(ReservationNotAvailable ex) {
+                throw new ReservationNotAvailable();
+            }
+    }
 
-        /*   Kontrollera att bordet är ledigt vid önskat datum/tid.
-            Kontrollera om kunden finns, annars skapa en ny kund.
-            Skapa reservation och länka till kund och bord.
-            Spara reservationen. */
-        
+    public void checkForAvailableTimeAndDate(String date, String time) throws ReservationNotAvailable {
+        List<Reservation> allReservations = reservationService.getAllReservations();
+        for(Reservation r : allReservations) {
+            if((r.getReservationDate() == LocalDate.parse(date)) && (r.getReservationTime() == LocalTime.parse(time))) {
+                throw new ReservationNotAvailable();
+            } 
+        }
+    }
+
+    public DiningTable checkForAvailableDiningTable(int amoutOfSeats) throws TableNotAvailableException{
+        List<DiningTable> tableList = tableService.getAllAvailableTables();
+        for(DiningTable dt : tableList) {
+            if(dt.getAmountOfSeats() >= amoutOfSeats) {
+                return dt;
+            }
+        }
+        throw new TableNotAvailableException(); 
+    }
+
+    public Customer checkForAlreadyExcistingCustomer(String fullName, String email, String number) {
+        List<Customer> customers = customerService.getAllCustomers();
+        for(Customer c : customers) {
+            if((fullName == c.getName()) && (email == c.getEmail())) {
+                return c;
+            }
+        }
+        Customer newCustomer = new Customer("14", fullName, email, number);
+        customerService.addCustomer(newCustomer); 
+        return newCustomer;
     }
 
     @Override
-    public void deleteReservatuion() {
-        System.out.println("We removed your reservation");
+    public void deleteReservatuion(String reservationId) {
+        reservationService.removeReservation(reservationId);
     }
 
     @Override
-    public List<Reservation> findReservation(String reservationID) {
-        return reservationService.allReservationsForCustomer(reservationID);
+    public Reservation findReservation(String reservationID) {
+        return reservationService.getReservation(reservationID);
     }
 
     @Override
@@ -51,7 +86,7 @@ public class BookingServiceProductionImp implements BookingService {
 
     @Override
     public void updateReservation(Reservation changedReservation) {
-        System.out.println("Updated! NOT!");
+        reservationService.changeReservation(changedReservation);
     }
     
 
