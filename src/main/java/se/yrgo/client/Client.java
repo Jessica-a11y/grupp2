@@ -24,8 +24,6 @@ public class Client {
 
         try {
             setUp(customerService, tableService, reservationService);
-            System.out.println(reservationService.getAllReservations().size());
-
             try (Scanner input = new Scanner(System.in)) {
                 introduction(input, service);
             }
@@ -55,6 +53,7 @@ public class Client {
         switch (option) {
             case 1:
                 create(input, service);
+                introduction(input, service);
                 break;
             case 2:
                 find(input, service);
