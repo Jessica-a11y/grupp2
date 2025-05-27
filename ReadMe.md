@@ -19,9 +19,7 @@ A console-based booking system for restaurants, developed as a group project for
 - **Spring Framework**
 - **JPA (Hibernate)**
 - **Maven** (for project structure and dependencies)
-
 - **JUnit** 
-
 
 ## Project Structure
 
@@ -29,13 +27,15 @@ A console-based booking system for restaurants, developed as a group project for
 src/
 ├── main/
 │   ├── java/
-│   │   └── se/grupp2/
+│   │   └── se/yrgo/
+|   |       ├── advice/         # Measure performance of BookingService.java by AspectJ (AOP)                         
+│   │       ├── client/         # Client-class with menu handling
+│   │       ├── data/           # DAO interfaces and implementations (ex. BookingDao BookingDaoJpaImpl)
 │   │       ├── domain/         # Domain-classes: Customer, Table, Reservation
-│   │       ├── dao/            # DAO interfaces and implementations (ex. BookingDao BookingDaoJpaImpl)
-│   │       ├── service/        # Service classes: BookingService, etc.
-│   │       └── main/           # Client-class with menu handling
+│   │       └── services/       # Service classes: BookingService, etc.
 │   └── resources/              # Resources (e.g., application.xml)
-└── test/                       # Unit tests
+|        ├── META-INF/          # Specifying the persistence unit name used by JPA.
+└── test/                       # Unit tests 
 ```
 ## Test Data
 
