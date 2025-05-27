@@ -9,10 +9,18 @@ import org.springframework.stereotype.Repository;
 
 import se.yrgo.domain.*;
 
-/** @author Danie, Emilia and Jessica
- * JPA implemntation of BookingDao that handles database operations for reservations, customers and dining tables.
- * This class uses EntityManager to handle database operations.
+/**
+ * JPA implementation of {@link BookingDao} that handles database operations for
+ * reservations, customers and dining tables.
+ * 
+ * <p>
+ * This class uses the JPA {@link EntityManager} to perform CRUD operations and
+ * queries.
+ * </p>
+ * 
+ * @author Daniel Grahn, Jessica Olofsson, Emilia Jarleback
  */
+
 @Repository
 public class BookingDaoJpaImpl implements BookingDao {
     @PersistenceContext
@@ -21,7 +29,7 @@ public class BookingDaoJpaImpl implements BookingDao {
     private static final String SELECT_ALL_RESERVATIONS = "select reservation from Reservation as reservation";
     private static final String SELECT_ALL_CUSTOMERS = "select customer from Customer as customer";
     private static final String SELECT_ALL_TABLES = "select table from DiningTable as table";
-    
+
     private static final String SELECT_AVAILABLE_TABLES = "select table from DiningTable as table where table.available = true";
     private static final String SELECT_RESERVATIONS_FOR_TABLE = "select reservation from Reservation as reservation where reservation.tableId = :tableID";
     private static final String SELECT_RESERVATIONS_FOR_CUSTOMER = "select reservation from Reservation as reservation where reservation.reservationId = :reservationID";
@@ -39,9 +47,11 @@ public class BookingDaoJpaImpl implements BookingDao {
     private static final String FIND_RESERVATION_SQL = "select reservation from Reservation as reservation where reservation.reservationId = :reservationId";
 
     private static final String AVAILABILITY_SQL = "UPDATE DiningTable as t SET t.available = false where t.tableNumber = :tableNumber";
-    
+
     /**
      * Uses JPA to add a reservation into the database.
+     * 
+     * @param newReservation The {@link Reservation} to add
      */
     @Override
     public void createReservation(Reservation newReservation) {
@@ -50,6 +60,8 @@ public class BookingDaoJpaImpl implements BookingDao {
 
     /**
      * Uses JPA to add a customer into the database.
+     * 
+     * @param newCustomer the {@link Customer} to add
      */
     @Override
     public void createCustomer(Customer newCustomer) {
@@ -59,6 +71,8 @@ public class BookingDaoJpaImpl implements BookingDao {
 
     /**
      * Uses JPA to add a dining table into the database.
+     * 
+     * @param newTable The {@link DiningTable} to add
      */
     @Override
     public void createTable(DiningTable newTable) {
@@ -68,6 +82,8 @@ public class BookingDaoJpaImpl implements BookingDao {
 
     /**
      * Returns a list of all customers in the database.
+     * 
+     * @return a list of all {@link Customer} objects
      */
     @Override
     public List<Customer> allCustomers() {
@@ -76,6 +92,8 @@ public class BookingDaoJpaImpl implements BookingDao {
 
     /**
      * Returns all tables in the database.
+     * 
+     * @return a list of all {@link DiningTable} objects
      */
     @Override
     public List<DiningTable> allTables() {
@@ -84,6 +102,8 @@ public class BookingDaoJpaImpl implements BookingDao {
 
     /**
      * Returns a list of all reservations in the database.
+     * 
+     * @return a list of all {@link Reservation} objects
      */
     @Override
     public List<Reservation> allReservations() {
@@ -92,6 +112,8 @@ public class BookingDaoJpaImpl implements BookingDao {
 
     /**
      * Returns a list of all dining tables that are avaialable (true).
+     * 
+     * @return a list of avaliable {@link DiningTable} objects
      */
     @Override
     @SuppressWarnings("unchecked")
@@ -101,6 +123,9 @@ public class BookingDaoJpaImpl implements BookingDao {
 
     /**
      * Returns a list of all reservations for a certain table.
+     * 
+     * @param tableId The table's unique identifier
+     * @return a list of {@link Reservation} objects for the specified table
      */
     @Override
     @SuppressWarnings("unchecked")
@@ -110,15 +135,21 @@ public class BookingDaoJpaImpl implements BookingDao {
 
     /**
      * Returns all reservations for a certain customer.
+     * 
+     * @param customerId the customer's unique identifier
+     * @return a list of {@link Reservation} objects for the specified customer
      */
     @Override
     @SuppressWarnings("unchecked")
     public List<Reservation> allReservationsForCustomer(String reservationId) {
-        return em.createQuery(SELECT_RESERVATIONS_FOR_CUSTOMER).setParameter("reservationID", reservationId).getResultList();
+        return em.createQuery(SELECT_RESERVATIONS_FOR_CUSTOMER).setParameter("reservationID", reservationId)
+                .getResultList();
     }
 
     /**
      * Updates a reservations time and date.
+     * 
+     * @param changedReservation the {@link Reservation} with updated information
      */
     @Override
     public void updateReservation(Reservation changedReservation) {
@@ -131,6 +162,8 @@ public class BookingDaoJpaImpl implements BookingDao {
 
     /**
      * Updates a customer.
+     * 
+     * @param changedCustomer the {@link Customer} with updated information
      */
     @Override
     public void updateCustomer(Customer changedCustomer) {
@@ -143,6 +176,8 @@ public class BookingDaoJpaImpl implements BookingDao {
 
     /**
      * Updates a dining table.
+     * 
+     * @param changedTable the {@link DiningTable} with updated information
      */
     @Override
     public void updateTable(DiningTable changedTable) {
@@ -155,6 +190,8 @@ public class BookingDaoJpaImpl implements BookingDao {
 
     /**
      * Deletes a certain dining table from the database.
+     * 
+     * @param reservationId the unique identifier of the reservation to delete
      */
     @Override
     public void deletReservation(String reservationId) {
@@ -165,6 +202,8 @@ public class BookingDaoJpaImpl implements BookingDao {
 
     /**
      * Deletes a certain customer from the database.
+     * 
+     * @param customer the {@link Customer} to delete
      */
     @Override
     public void deletCustomer(Customer customer) {
@@ -175,6 +214,8 @@ public class BookingDaoJpaImpl implements BookingDao {
 
     /**
      * Deletes a certain table from the database.
+     * 
+     * @param table the {@link DiningTable} to delete
      */
     @Override
     public void deletTable(DiningTable table) {
@@ -185,6 +226,9 @@ public class BookingDaoJpaImpl implements BookingDao {
 
     /**
      * Returns a certain dining table, based of it't table number.
+     * 
+     * @param tableNumber the unique table number
+     * @return the {@link DiningTable} if found, otherwise {@code null}
      */
     @Override
     public DiningTable findTableById(String tableNumber) {
@@ -193,6 +237,9 @@ public class BookingDaoJpaImpl implements BookingDao {
 
     /**
      * Returns a customer basen of it's customerId.
+     * 
+     * @param customerId the unique customer ID
+     * @return the {@link Customer} if found, otherwise {@code null}
      */
     @Override
     public Customer findCustomer(String customerId) {
@@ -201,14 +248,20 @@ public class BookingDaoJpaImpl implements BookingDao {
 
     /**
      * Returns a reservation basen on it's reservation id.
+     * 
+     * @param reservationId the unique reservation ID
+     * @return the {@link Reservation} if found, otherwise {@code null}
      */
     @Override
     public Reservation findReservation(String reservationId) {
-        return (Reservation) em.createQuery(FIND_RESERVATION_SQL).setParameter("reservationId", reservationId).getSingleResult();
+        return (Reservation) em.createQuery(FIND_RESERVATION_SQL).setParameter("reservationId", reservationId)
+                .getSingleResult();
     }
 
     /**
      * Changes the avaialility for a certain table.
+     * 
+     * @param tableNumber the unique table number
      */
     @Override
     public void changeAvailability(String tableNumber) {

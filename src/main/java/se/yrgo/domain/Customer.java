@@ -64,9 +64,9 @@ public class Customer {
      * Constructs a new Customer with the specified details
      * 
      * @param customerID The unique customer identifier
-     * @param name The customer's full name
-     * @param email The customer's email address
-     * @param telephone The customer's telephone number
+     * @param name       The customer's full name
+     * @param email      The customer's email address
+     * @param telephone  The customer's telephone number
      */
     public Customer(String customerID, String name, String email, String telephone) {
         this.customerID = customerID;
@@ -101,7 +101,6 @@ public class Customer {
     public String getName() {
         return name;
     }
-
 
     /**
      * Returns the customer's email address

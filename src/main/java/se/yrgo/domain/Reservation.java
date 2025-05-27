@@ -16,7 +16,7 @@ import javax.persistence.*;
  */
 
 @Entity
-public class Reservation{
+public class Reservation {
     /**
      * The internal database identifier for the reservation (Auto-generated).
      */
@@ -56,18 +56,20 @@ public class Reservation{
     /**
      * Default constructor required by JPA
      */
-    public Reservation() {}
+    public Reservation() {
+    }
 
     /**
      * Constructs a new reservation with the specified details.
      * 
-     * @param reservationId The unique reservation identifier
-     * @param table The dining table for the reservation
-     * @param customer The customer who made the reservation
+     * @param reservationId   The unique reservation identifier
+     * @param table           The dining table for the reservation
+     * @param customer        The customer who made the reservation
      * @param reservationDate The date of the reservation
      * @param reservationTime The time of the reservation
      */
-    public Reservation(String reservationId, DiningTable table, Customer customer, LocalDate reservationDate, LocalTime reservationTime) {
+    public Reservation(String reservationId, DiningTable table, Customer customer, LocalDate reservationDate,
+            LocalTime reservationTime) {
         this.reservationId = reservationId;
         this.table = table;
         this.customer = customer;
@@ -129,7 +131,6 @@ public class Reservation{
         return reservationTime;
     }
 
-
     public void setReservationDate(LocalDate reservationDate) {
         this.reservationDate = reservationDate;
     }
@@ -137,7 +138,6 @@ public class Reservation{
     public void setReservationTime(LocalTime reservationTime) {
         this.reservationTime = reservationTime;
     }
-
 
     /**
      * Returns a string representation of the reservation, including all details.
@@ -147,9 +147,9 @@ public class Reservation{
 
     @Override
     public String toString() {
-        return "Reservation:\n\tReservation ID: " + reservationId + 
-                "\n\tTable: " + table + 
-                "\n\tCustomer: " + customer + ", Date: " + reservationDate + 
+        return "Reservation:\n\tReservation ID: " + reservationId +
+                "\n\tTable: " + table +
+                "\n\tCustomer: " + customer + ", Date: " + reservationDate +
                 "\n\tTime: " + reservationTime;
     }
 
@@ -159,9 +159,10 @@ public class Reservation{
      * @return a formatted string with customer and reservation details
      */
     public String info() {
-        return "Reservation:" +  
-                "\n\tName: " + customer.getName() + " - Email: " + customer.getEmail() + " - Phone number: " + customer.getTelephone() +
-                "\n\tDate: " + reservationDate + 
+        return "Reservation:" +
+                "\n\tName: " + customer.getName() + " - Email: " + customer.getEmail() + " - Phone number: "
+                + customer.getTelephone() +
+                "\n\tDate: " + reservationDate +
                 "\n\tTime: " + reservationTime + "\n";
     }
-} 
+}
