@@ -25,13 +25,17 @@ public class BookingServiceProductionImp implements BookingService {
     }
 
     @Override
-    @Transactional(rollbackFor = {TableNotAvailableException.class, ReservationNotAvailable.class})
     public void makeReservation(String date, String time, int amoutOfSeats, String fullName, String email, String number) throws TableNotAvailableException, ReservationNotAvailable{
-            checkForAvailableTimeAndDate(date, time);
-            DiningTable tableToBook = checkForAvailableDiningTable(amoutOfSeats);
-            Customer newCustomer = checkForAlreadyExcistingCustomer(fullName, email, number);
-            reservationService.addReservation(new Reservation("r4", tableToBook, newCustomer, LocalDate.parse(date), LocalTime.parse(time)));
-       
+            try {
+                checkForAvailableTimeAndDate(date, time);
+                DiningTable tableToBook = checkForAvailableDiningTable(amoutOfSeats);
+                Customer newCustomer = checkForAlreadyExcistingCustomer(fullName, email, number);
+                reservationService.addReservation(new Reservation("r4", tableToBook, newCustomer, LocalDate.parse(date), LocalTime.parse(time)));
+            } catch(TableNotAvailableException e) {
+                throw new TableNotAvailableException();
+            }catch(ReservationNotAvailable ex) {
+                throw new ReservationNotAvailable();
+            }
     }
 
     public void checkForAvailableTimeAndDate(String date, String time) throws ReservationNotAvailable {
