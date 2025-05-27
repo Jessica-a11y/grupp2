@@ -2,7 +2,6 @@ package se.yrgo.services;
 
 import java.util.List;
 
-import se.yrgo.data.CustomerNotFoundException;
 import se.yrgo.data.TableNotAvailableException;
 import se.yrgo.domain.Reservation;
 

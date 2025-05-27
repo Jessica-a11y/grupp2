@@ -59,6 +59,14 @@ public class Reservation{
         return reservationTime;
     }
 
+    public void setReservationDate(LocalDate reservationDate) {
+        this.reservationDate = reservationDate;
+    }
+
+    public void setReservationTime(LocalTime reservationTime) {
+        this.reservationTime = reservationTime;
+    }
+
     @Override
     public String toString() {
         return "Reservation:\n\tReservation ID: " + reservationId + 

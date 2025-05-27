@@ -24,6 +24,7 @@ public class Client {
 
         try {
             setUp(customerService, tableService, reservationService);
+            System.out.println(reservationService.getAllReservations().size());
 
             try (Scanner input = new Scanner(System.in)) {
                 introduction(input, service);
@@ -41,8 +42,9 @@ public class Client {
         System.out.println("Welcome to the Restaurant Booking system.");
         System.out.println("1. Make a reservation");
         System.out.println("2. Find your reservation");
-        System.out.println("3. Cancel reservation");
-        System.out.println("4. Exit");
+        System.out.println("3. Change your reservation");
+        System.out.println("4. Cancel reservation");
+        System.out.println("5. Exit");
         navigation(input, service);
     }
 
@@ -54,18 +56,19 @@ public class Client {
             case 1:
                 create(input, service);
                 break;
-
             case 2:
                 find(input, service);
                 introduction(input, service);
                 break;
-
             case 3:
+                change(input, service);
+                introduction(input, service);
+                break;
+            case 4:
                 cancel(input, service);
                 introduction(input, service);
                 break;
-
-            case 4:
+            case 5:
                 System.out.println("Goodbye");
                 break;
             default:
@@ -79,6 +82,19 @@ public class Client {
         String reservationID = input.nextLine();
         Reservation result = service.findReservation(reservationID);
         System.out.println(result.info());
+    }
+
+    public static void change(Scanner input, BookingService service) {
+        System.out.println("Please enter your reservation number");
+        String reservationId = input.nextLine();
+
+        System.out.println("Choose a date (2000-02-22)");
+        String date = input.nextLine();
+
+        System.out.println("What time");
+        String time = input.nextLine();
+
+        service.updateReservation(reservationId, date, time); 
     }
 
     public static void cancel(Scanner input, BookingService service) {
