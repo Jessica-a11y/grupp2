@@ -65,7 +65,6 @@ public class BookingDaoJpaImpl implements BookingDao {
      */
     @Override
     public void createCustomer(Customer newCustomer) {
-        System.out.println("using JPA");
         em.persist(newCustomer);
     }
 
@@ -76,7 +75,6 @@ public class BookingDaoJpaImpl implements BookingDao {
      */
     @Override
     public void createTable(DiningTable newTable) {
-        System.out.println("using JPA");
         em.persist(newTable);
     }
 

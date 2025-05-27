@@ -24,7 +24,6 @@ public class Client {
 
         try {
             setUp(customerService, tableService, reservationService);
-            System.out.println(reservationService.getAllReservations().size());
 
             try (Scanner input = new Scanner(System.in)) {
                 introduction(input, service);
@@ -39,12 +38,12 @@ public class Client {
     }
 
     public static void introduction(Scanner input, BookingService service) throws TableNotAvailableException, ReservationNotAvailable{
-        System.out.println("Welcome to the Restaurant Booking system.");
-        System.out.println("1. Make a reservation");
-        System.out.println("2. Find your reservation");
-        System.out.println("3. Change your reservation");
-        System.out.println("4. Cancel reservation");
-        System.out.println("5. Exit");
+        System.out.println("--- Welcome to Vapiano ---");
+        System.out.println("[1] Make a reservation");
+        System.out.println("[2] Find your reservation");
+        System.out.println("[3] Change your reservation");
+        System.out.println("[4] Cancel reservation");
+        System.out.println("[5] Exit");
         navigation(input, service);
     }
 
@@ -61,11 +60,15 @@ public class Client {
                 introduction(input, service);
                 break;
             case 3:
-                change(input, service);
+                System.out.println("What's your reservation number");
+                String reservationID = input.nextLine();
+                change(input, service, reservationID);
                 introduction(input, service);
                 break;
             case 4:
-                cancel(input, service);
+                System.out.println("What's your reservation number");
+                String resId = input.nextLine();
+                cancel(input, service, resId);
                 introduction(input, service);
                 break;
             case 5:
@@ -77,78 +80,55 @@ public class Client {
         }
     }
 
-    private static void find(Scanner input, BookingService service) {
-        System.out.println("What's your reservation number");
-        String reservationID = input.nextLine();
-        Reservation result = service.findReservation(reservationID);
-        System.out.println(result.info());
-    }
-
-    public static void change(Scanner input, BookingService service) {
-        System.out.println("Please enter your reservation number");
-        String reservationId = input.nextLine();
-
-        System.out.println("Choose a date (2000-02-22)");
-        String date = input.nextLine();
-
-        System.out.println("What time");
-        String time = input.nextLine();
-
-        service.updateReservation(reservationId, date, time); 
-    }
-
-    public static void cancel(Scanner input, BookingService service) {
-        System.out.println("What's your reservation number");
-        String reservationID = input.nextLine();
-        Reservation result = service.findReservation(reservationID);
-        System.out.println(result);
-        System.out.println("Would you like to cancel this reservation?");
-        String answer = input.nextLine();
-        switch (answer) {
-            case "yes":
-                service.deleteReservatuion(reservationID);
-                System.out.println("Reservation cancelled");
-                break;
-            case "no":
-                System.out.println("We see you in " + result.getReservationDate().getMonth() + " the "
-                        + result.getReservationDate().getDayOfMonth() + "th at " + result.getReservationTime());
-            default:
-                break;
-        }
-
-    }
-
-    public static void create(Scanner input, BookingService service) throws TableNotAvailableException, ReservationNotAvailable  {
-        System.out.println("What day would you like to book?");
+     public static void create(Scanner input, BookingService service) throws TableNotAvailableException, ReservationNotAvailable  {
+        System.out.println("--- Make a reservation ---");
+        System.out.println("Which day would you like to dine with us? (2000-01-01)");
         String date = input.nextLine();
         String time = timePicker(input);
         
-        System.out.println("Amount of people");
+        System.out.println("\nHow large will your party be?");
         int amountOfPeople = input.nextInt();
         input.nextLine();
         
-        System.out.println("First and lastname");
+        System.out.println("\nEnter your first and lastname");
         String fullName = input.nextLine();
 
-        System.out.println("Email");
+        System.out.println("\nEnter your email");
         String email = input.nextLine();
         
-        System.out.println("Phone number");
+        System.out.println("\nEnter your phone number");
         String number = input.nextLine();
         
-        List<String> strings = List.of(date, time, fullName, email, number); 
-        for (String s : strings) { 
-            System.out.println(s); 
+        System.out.println("- Your Reservation -");
+        System.out.println("\n\tDate: " + date +
+                        "\n\tTime: " + time + 
+                        "\n\tName: " + fullName +
+                        "\n\tEmail: " + email + 
+                        "\n\tNumber: " + number);
+        
+        System.out.println("- Confirm/Cancel -\n");
+        String confirm = input.nextLine();
+
+        switch (confirm) {
+            case "confirm":
+                service.makeReservation(date, time, amountOfPeople, fullName, email, number);
+                System.out.println("Welcome to Vapiano the " + date + " at " + time);
+                introduction(input, service);
+                break;
+            case "cancel":
+                System.out.println("Canceling reservation");
+                introduction(input, service);
+            default:
+                break;
         }
-        service.makeReservation(date, time, amountOfPeople, fullName, email, number);
     }
 
     public static String timePicker(Scanner input) {
-        System.out.println("At what time?");
-        System.out.println("1. 16:00\n" +
-                "2. 18:00\n" +
-                "3. 20:00\n" +
-                "4. 22:00");
+        System.out.println("\nAt what time would you like to dine?");
+        System.out.println("[1] 16:00\n" +
+                "[2] 18:00\n" +
+                "[3] 20:00\n" +
+                "[4] 22:00");
         int option = input.nextInt();
         input.nextLine();
         String time = "";
@@ -166,10 +146,62 @@ public class Client {
                 time = "22:00";
                 break;
             default:
-                System.out.println("try again");
+                System.out.println("Please, pick one of the following: ");
                 break;
         }
         return time;
+    }
+
+    private static void find(Scanner input, BookingService service) {
+        System.out.println("--- Find Reservation ---");
+        System.out.println("Enter your reservation ID");
+        String reservationID = input.nextLine();
+        Reservation result = service.findReservation(reservationID);
+        System.out.println("You have the following reservation:\n");
+        System.out.println(result.info());
+
+         System.out.println("[1] Change reservation\n" +
+                            "[2] Remove reservation\n");
+        int option = input.nextInt();
+        switch (option) {
+            case 1:
+                change(input, service, result.getReservationId());
+                break;
+            case 2:
+                cancel(input, service, result.getReservationId());
+                break;
+            default:
+                break;
+        }
+    }
+
+    public static void change(Scanner input, BookingService service, String id) {
+        System.out.println("Choose a date (2000-02-22)");
+        String date = input.nextLine();
+
+        System.out.println("What time");
+        String time = input.nextLine();
+
+        service.updateReservation(id, date, time); 
+    }
+
+    public static void cancel(Scanner input, BookingService service, String id) {
+        Reservation result = service.findReservation(id);
+        System.out.println(result);
+        System.out.println("Would you like to cancel this reservation?");
+        String answer = input.nextLine();
+        switch (answer) {
+            case "yes":
+                service.deleteReservatuion(id);
+                System.out.println("Reservation cancelled");
+                break;
+            case "no":
+                System.out.println("We see you in " + result.getReservationDate().getMonth() + " the "
+                        + result.getReservationDate().getDayOfMonth() + "th at " + result.getReservationTime());
+            default:
+                break;
+        }
+
     }
 
     public static void setUp(CustomerService customerService, TableService tableService,
