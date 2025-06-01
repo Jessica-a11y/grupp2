@@ -64,12 +64,12 @@ public interface BookingDao {
     public Customer findCustomer(String customerId);
 
     /**
-     * Retrieves a reservation by its unique ID.
+     * Retrieves a reservation by a customers email.
      *
-     * @param reservationId the unique identifier of the reservation
+     * @param customerEmail Identifier of the customer's email to find it's reservation
      * @return the {@link Reservation} if found, otherwise {@code null}
      */
-    public Reservation findReservation(String reservationId);
+    public Reservation findReservation(String customerEmail); 
 
     // --- Read operations (get all) ---
 

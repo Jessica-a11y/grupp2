@@ -143,15 +143,15 @@ public class BookingServiceProductionImp implements BookingService {
      * {@inheritDoc}
      * 
      * <p>
-     * Finds and returns a reservation by its ID.
+     * Finds and returns a reservation by a customers email.
      * </p>
      * 
-     * @param reservationID The ID of the reservation to find
+     * @param customerEmail The email of customer, which reservation to find
      * @return the {@link Reservation} if found, otherwise null
      */
     @Override
-    public Reservation findReservation(String reservationID) {
-        return reservationService.getReservation(reservationID);
+    public Reservation findReservation(String customerEmail) {
+        return reservationService.getReservation(customerEmail);
     }
 
     /**

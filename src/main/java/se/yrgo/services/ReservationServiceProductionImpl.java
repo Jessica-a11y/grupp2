@@ -63,15 +63,15 @@ public class ReservationServiceProductionImpl implements ReservationService {
      * {@inheritDoc}
      * 
      * <p>
-     * Retrieves a reservation by its unique ID from the DAO layer.
+     * Retrieves a reservation by a customers email from the DAO layer.
      * </p>
      * 
-     * @param reservationId The unique identifies of the reservation
+     * @param customerEmail Identifies the email connected to the reservation
      * @return the {@link Reservation} if found, otherwise {@code null}
      */
     @Override
-    public Reservation getReservation(String reservationId) {
-        return dao.findReservation(reservationId);
+    public Reservation getReservation(String customerEmail) {
+        return dao.findReservation(customerEmail);
     }
 
     /**

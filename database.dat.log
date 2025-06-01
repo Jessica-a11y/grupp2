@@ -9,168 +9,57 @@ create table Reservation (id integer not null, reservationDate date, reservation
 alter table Reservation add constraint FKmrfygyy9wi4be7nlyuogrn24n foreign key (customer_id) references Customer
 alter table Reservation add constraint FK839smkkt6p1pwlhivviuhlq0f foreign key (table_id) references DiningTable
 SET AUTOCOMMIT FALSE
-ALTER SEQUENCE HIBERNATE_SEQUENCE RESTART WITH 1132
-INSERT INTO CUSTOMER VALUES(1131,'C1','doe.john@gmail.com','John Doe','0707080908')
+ALTER SEQUENCE HIBERNATE_SEQUENCE RESTART WITH 1196
+INSERT INTO CUSTOMER VALUES(1195,'530','doe.john@gmail.com','John Doe','0707080908')
 COMMIT
 SET AUTOCOMMIT TRUE
 SET AUTOCOMMIT FALSE
-ALTER SEQUENCE HIBERNATE_SEQUENCE RESTART WITH 1133
-INSERT INTO DININGTABLE VALUES(1132,4,TRUE,'T1')
+ALTER SEQUENCE HIBERNATE_SEQUENCE RESTART WITH 1197
+INSERT INTO CUSTOMER VALUES(1196,'531','anna@gmail.com','Anna Andersson','0701234567')
 COMMIT
 SET AUTOCOMMIT TRUE
 SET AUTOCOMMIT FALSE
-SET AUTOCOMMIT TRUE
-SET AUTOCOMMIT FALSE
-ALTER SEQUENCE HIBERNATE_SEQUENCE RESTART WITH 1134
-ALTER SEQUENCE HIBERNATE_SEQUENCE RESTART WITH 1135
-INSERT INTO CUSTOMER VALUES(1133,'14','denGryme@gamil.com','Daniel Gran','0000000000')
-INSERT INTO RESERVATION VALUES(1134,'2025-05-30','r4','18:30:00',1133,1132)
+ALTER SEQUENCE HIBERNATE_SEQUENCE RESTART WITH 1198
+INSERT INTO CUSTOMER VALUES(1197,'532','bertil@gmail.com','Bertil Bengtsson','0709876543')
 COMMIT
 SET AUTOCOMMIT TRUE
 SET AUTOCOMMIT FALSE
-SET AUTOCOMMIT TRUE
-SET AUTOCOMMIT FALSE
-SET AUTOCOMMIT TRUE
-SET AUTOCOMMIT FALSE
-SET AUTOCOMMIT TRUE
-/*C2*/SET SCHEMA PUBLIC
-CONNECT USER SA
-DISCONNECT
-/*C3*/SET SCHEMA PUBLIC
-CONNECT USER SA
-drop table if exists Customer CASCADE
-drop table if exists DiningTable CASCADE
-drop table if exists Reservation CASCADE
-create table Customer (id integer not null, customerID varchar(255), email varchar(255), name varchar(255), telephone varchar(255), primary key (id))
-create table DiningTable (id integer not null, amountOfSeats integer not null, available boolean, tableNumber varchar(255), primary key (id))
-create table Reservation (id integer not null, reservationDate date, reservationId varchar(255), reservationTime time, customer_id integer, table_id integer, primary key (id))
-alter table Reservation add constraint FKmrfygyy9wi4be7nlyuogrn24n foreign key (customer_id) references Customer
-alter table Reservation add constraint FK839smkkt6p1pwlhivviuhlq0f foreign key (table_id) references DiningTable
-SET AUTOCOMMIT FALSE
-SET AUTOCOMMIT TRUE
-SET AUTOCOMMIT FALSE
-ALTER SEQUENCE HIBERNATE_SEQUENCE RESTART WITH 1136
-INSERT INTO CUSTOMER VALUES(1135,'C1','doe.john@gmail.com','John Doe','0707080908')
+ALTER SEQUENCE HIBERNATE_SEQUENCE RESTART WITH 1199
+INSERT INTO CUSTOMER VALUES(1198,'533','cecilia@gmail.com','Cecilia Citron','0706146846')
 COMMIT
 SET AUTOCOMMIT TRUE
 SET AUTOCOMMIT FALSE
-ALTER SEQUENCE HIBERNATE_SEQUENCE RESTART WITH 1137
-INSERT INTO DININGTABLE VALUES(1136,4,TRUE,'T1')
+ALTER SEQUENCE HIBERNATE_SEQUENCE RESTART WITH 1200
+INSERT INTO DININGTABLE VALUES(1199,4,TRUE,'1')
 COMMIT
 SET AUTOCOMMIT TRUE
 SET AUTOCOMMIT FALSE
-ALTER SEQUENCE HIBERNATE_SEQUENCE RESTART WITH 1138
-INSERT INTO RESERVATION VALUES(1137,'2025-05-27','R1','18:00:00',1135,1136)
+ALTER SEQUENCE HIBERNATE_SEQUENCE RESTART WITH 1201
+INSERT INTO DININGTABLE VALUES(1200,2,TRUE,'2')
+COMMIT
+SET AUTOCOMMIT TRUE
+SET AUTOCOMMIT FALSE
+ALTER SEQUENCE HIBERNATE_SEQUENCE RESTART WITH 1202
+INSERT INTO DININGTABLE VALUES(1201,6,TRUE,'3')
 COMMIT
 SET AUTOCOMMIT TRUE
 SET AUTOCOMMIT FALSE
 SET AUTOCOMMIT TRUE
 SET AUTOCOMMIT FALSE
 SET AUTOCOMMIT TRUE
-/*C4*/SET SCHEMA PUBLIC
-CONNECT USER SA
-DISCONNECT
-/*C5*/SET SCHEMA PUBLIC
-CONNECT USER SA
-drop table if exists Customer CASCADE
-drop table if exists DiningTable CASCADE
-drop table if exists Reservation CASCADE
-create table Customer (id integer not null, customerID varchar(255), email varchar(255), name varchar(255), telephone varchar(255), primary key (id))
-create table DiningTable (id integer not null, amountOfSeats integer not null, available boolean, tableNumber varchar(255), primary key (id))
-create table Reservation (id integer not null, reservationDate date, reservationId varchar(255), reservationTime time, customer_id integer, table_id integer, primary key (id))
-alter table Reservation add constraint FKmrfygyy9wi4be7nlyuogrn24n foreign key (customer_id) references Customer
-alter table Reservation add constraint FK839smkkt6p1pwlhivviuhlq0f foreign key (table_id) references DiningTable
 SET AUTOCOMMIT FALSE
-ALTER SEQUENCE HIBERNATE_SEQUENCE RESTART WITH 1139
-INSERT INTO DININGTABLE VALUES(1138,3,TRUE,'T1')
-COMMIT
-SET AUTOCOMMIT TRUE
-SET AUTOCOMMIT FALSE
-ALTER SEQUENCE HIBERNATE_SEQUENCE RESTART WITH 1140
-INSERT INTO DININGTABLE VALUES(1139,4,FALSE,'T2')
-COMMIT
-SET AUTOCOMMIT TRUE
-SET AUTOCOMMIT FALSE
-ALTER SEQUENCE HIBERNATE_SEQUENCE RESTART WITH 1141
-INSERT INTO DININGTABLE VALUES(1140,6,TRUE,'T3')
-COMMIT
-SET AUTOCOMMIT TRUE
-SET AUTOCOMMIT FALSE
-ALTER SEQUENCE HIBERNATE_SEQUENCE RESTART WITH 1142
-INSERT INTO DININGTABLE VALUES(1141,8,TRUE,'T4')
-COMMIT
-SET AUTOCOMMIT TRUE
-SET AUTOCOMMIT FALSE
-ALTER SEQUENCE HIBERNATE_SEQUENCE RESTART WITH 1143
-INSERT INTO DININGTABLE VALUES(1142,9,FALSE,'T5')
-COMMIT
-SET AUTOCOMMIT TRUE
-SET AUTOCOMMIT FALSE
-SET AUTOCOMMIT TRUE
-/*C6*/SET SCHEMA PUBLIC
-CONNECT USER SA
-DISCONNECT
-/*C7*/SET SCHEMA PUBLIC
-CONNECT USER SA
-drop table if exists Customer CASCADE
-drop table if exists DiningTable CASCADE
-drop table if exists Reservation CASCADE
-create table Customer (id integer not null, customerID varchar(255), email varchar(255), name varchar(255), telephone varchar(255), primary key (id))
-create table DiningTable (id integer not null, amountOfSeats integer not null, available boolean, tableNumber varchar(255), primary key (id))
-create table Reservation (id integer not null, reservationDate date, reservationId varchar(255), reservationTime time, customer_id integer, table_id integer, primary key (id))
-alter table Reservation add constraint FKmrfygyy9wi4be7nlyuogrn24n foreign key (customer_id) references Customer
-alter table Reservation add constraint FK839smkkt6p1pwlhivviuhlq0f foreign key (table_id) references DiningTable
-SET AUTOCOMMIT FALSE
-ALTER SEQUENCE HIBERNATE_SEQUENCE RESTART WITH 1144
-INSERT INTO CUSTOMER VALUES(1143,'C1','doe.john@gmail.com','John Doe','0707080908')
-COMMIT
-SET AUTOCOMMIT TRUE
-SET AUTOCOMMIT FALSE
-ALTER SEQUENCE HIBERNATE_SEQUENCE RESTART WITH 1145
-INSERT INTO DININGTABLE VALUES(1144,4,TRUE,'T1')
+ALTER SEQUENCE HIBERNATE_SEQUENCE RESTART WITH 1203
+INSERT INTO RESERVATION VALUES(1202,'2025-06-01','12345','18:00:00',1195,1199)
 COMMIT
 SET AUTOCOMMIT TRUE
 SET AUTOCOMMIT FALSE
 SET AUTOCOMMIT TRUE
 SET AUTOCOMMIT FALSE
-ALTER SEQUENCE HIBERNATE_SEQUENCE RESTART WITH 1146
-INSERT INTO RESERVATION VALUES(1145,'2025-05-30','R1','20:00:00',1143,1144)
+SET AUTOCOMMIT TRUE
+SET AUTOCOMMIT FALSE
+ALTER SEQUENCE HIBERNATE_SEQUENCE RESTART WITH 1204
+INSERT INTO RESERVATION VALUES(1203,'2025-06-01','12346','20:00:00',1196,1200)
 COMMIT
 SET AUTOCOMMIT TRUE
 SET AUTOCOMMIT FALSE
 SET AUTOCOMMIT TRUE
-SET AUTOCOMMIT FALSE
-DELETE FROM RESERVATION WHERE ID=1145
-INSERT INTO RESERVATION VALUES(1145,'2024-01-20','R1','18:30:00',1143,1144)
-DELETE FROM RESERVATION WHERE ID=1145
-INSERT INTO RESERVATION VALUES(1145,'2024-01-20','R1','18:30:00',1143,1144)
-COMMIT
-SET AUTOCOMMIT TRUE
-SET AUTOCOMMIT FALSE
-SET AUTOCOMMIT TRUE
-/*C8*/SET SCHEMA PUBLIC
-CONNECT USER SA
-DISCONNECT
-/*C9*/SET SCHEMA PUBLIC
-CONNECT USER SA
-drop table if exists Customer CASCADE
-drop table if exists DiningTable CASCADE
-drop table if exists Reservation CASCADE
-create table Customer (id integer not null, customerID varchar(255), email varchar(255), name varchar(255), telephone varchar(255), primary key (id))
-create table DiningTable (id integer not null, amountOfSeats integer not null, available boolean, tableNumber varchar(255), primary key (id))
-create table Reservation (id integer not null, reservationDate date, reservationId varchar(255), reservationTime time, customer_id integer, table_id integer, primary key (id))
-alter table Reservation add constraint FKmrfygyy9wi4be7nlyuogrn24n foreign key (customer_id) references Customer
-alter table Reservation add constraint FK839smkkt6p1pwlhivviuhlq0f foreign key (table_id) references DiningTable
-SET AUTOCOMMIT FALSE
-ALTER SEQUENCE HIBERNATE_SEQUENCE RESTART WITH 1147
-INSERT INTO CUSTOMER VALUES(1146,'C1','doe.john@gmail.com','John Doe','0707080908')
-COMMIT
-SET AUTOCOMMIT TRUE
-SET AUTOCOMMIT FALSE
-ALTER SEQUENCE HIBERNATE_SEQUENCE RESTART WITH 1148
-INSERT INTO DININGTABLE VALUES(1147,4,TRUE,'T1')
-COMMIT
-SET AUTOCOMMIT TRUE
-SET AUTOCOMMIT FALSE
-SET AUTOCOMMIT TRUE
-SET AUTOCOMMIT FALSE

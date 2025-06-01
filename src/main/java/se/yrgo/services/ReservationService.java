@@ -28,12 +28,12 @@ public interface ReservationService {
     void addReservation(Reservation reservation) throws TableNotAvailableException;
 
     /**
-     * Retrieves a reservation by its unique ID.
+     * Retrieves a reservation by a customersEmail.
      * 
-     * @param reservationId The unique identifies of the reservation
+     * @param customerEmail Identifies the email connected to the reservation
      * @return the {@link Reservation} if found, otherwise {@code null}
      */
-    public Reservation getReservation(String reservatinId);
+    public Reservation getReservation(String customerEmail); 
 
     /**
      * Removes a reservation with the specified ID.

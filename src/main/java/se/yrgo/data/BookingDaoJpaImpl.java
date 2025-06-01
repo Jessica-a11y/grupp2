@@ -43,8 +43,8 @@ public class BookingDaoJpaImpl implements BookingDao {
     private static final String DELET_Table = "DELETE FROM DiningTable as t WHERE t.tableNumber = :tableNumber";
 
     private static final String FIND_TABLE_SQL = "select table from DiningTable as table where table.tableNumber = :tableNumber";
-    private static final String FIND_CUSTOMER_SQL = "select customer from Customer as customer where customer.customerID = :customerId";
-    private static final String FIND_RESERVATION_SQL = "select reservation from Reservation as reservation where reservation.reservationId = :reservationId";
+    private static final String FIND_CUSTOMER_SQL = "select customer from Customer as customer where customer.customerID = :customerId"; 
+    private static final String FIND_RESERVATION_SQL = "select r from Reservation as r JOIN r.customer as c where c.email = :email";
 
     private static final String AVAILABILITY_SQL = "UPDATE DiningTable as t SET t.available = false where t.tableNumber = :tableNumber";
 
@@ -245,14 +245,14 @@ public class BookingDaoJpaImpl implements BookingDao {
     }
 
     /**
-     * Returns a reservation basen on it's reservation id.
+     * Returns a reservation basen on the email.
      * 
-     * @param reservationId the unique reservation ID
+     * @param email the unique email
      * @return the {@link Reservation} if found, otherwise {@code null}
      */
     @Override
-    public Reservation findReservation(String reservationId) {
-        return (Reservation) em.createQuery(FIND_RESERVATION_SQL).setParameter("reservationId", reservationId)
+    public Reservation findReservation(String email) {
+        return (Reservation) em.createQuery(FIND_RESERVATION_SQL).setParameter("email", email)
                 .getSingleResult();
     }
 

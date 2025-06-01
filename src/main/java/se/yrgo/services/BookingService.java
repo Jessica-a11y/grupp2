@@ -51,12 +51,12 @@ public interface BookingService {
     public void deleteReservatuion(String reservationId);
 
     /**
-     * Finds a reservation by its ID.
+     * Finds a reservation by the cusromers email.
      * 
-     * @param reservationID the ID of the reservation to retrieve
+     * @param customerEmail the email of the customer to retrieve the reservation
      * @return the reservation object if found, otherwise null
      */
-    public Reservation findReservation(String reservationID);
+    public Reservation findReservation(String customerEmail);
 
     /**
      * Displays avaliable tables for booking.
