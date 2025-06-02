@@ -32,7 +32,7 @@ public interface BookingService {
      * @throws ReservationNotAvaliable    if the reservation cannot be made for
      *                                    other reasons
      */
-    public void makeReservation(String date, String time, int amountOfSeats, String fullName, String email,
+    public Reservation makeReservation(String date, String time, int amountOfSeats, String fullName, String email,
             String number) throws TableNotAvailableException, ReservationNotAvailable;
 
     /**
@@ -51,12 +51,12 @@ public interface BookingService {
     public void deleteReservatuion(String reservationId);
 
     /**
-     * Finds a reservation by the cusromers email.
+     * Finds a reservation by the reservationId.
      * 
-     * @param customerEmail the email of the customer to retrieve the reservation
+     * @param reservationId the ID of the reservation to find
      * @return the reservation object if found, otherwise null
      */
-    public Reservation findReservation(String customerEmail);
+    public Reservation findReservation(String reservationId);
 
     /**
      * Displays avaliable tables for booking.

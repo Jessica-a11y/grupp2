@@ -4,6 +4,8 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.*;
 
+import javax.persistence.NoResultException;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import se.yrgo.data.*;
@@ -56,12 +58,13 @@ public class BookingServiceProductionImp implements BookingService {
      * @throws ReservationNotAvaliable    of the reservation slot is already taken
      */
     @Override
-    public void makeReservation(String date, String time, int amountOfSeats, String fullName, String email, String number) throws TableNotAvailableException, ReservationNotAvailable {
+    public Reservation makeReservation(String date, String time, int amountOfSeats, String fullName, String email, String number) throws TableNotAvailableException, ReservationNotAvailable {
         try {
             checkForAvailableTimeAndDate(date, time);
             DiningTable tableToBook = checkForAvailableDiningTable(amountOfSeats);
             Customer newCustomer = checkForAlreadyExcistingCustomer(fullName, email, number);
-            reservationService.addReservation(new Reservation("r4", tableToBook, newCustomer, LocalDate.parse(date), LocalTime.parse(time)));
+            Reservation reservation = reservationService.addReservation(new Reservation("12347", tableToBook, newCustomer, LocalDate.parse(date), LocalTime.parse(time)));
+            return reservation;
         } catch (TableNotAvailableException e) {
             throw new TableNotAvailableException();
         } catch (ReservationNotAvailable ex) {
@@ -146,12 +149,13 @@ public class BookingServiceProductionImp implements BookingService {
      * Finds and returns a reservation by a customers email.
      * </p>
      * 
-     * @param customerEmail The email of customer, which reservation to find
+     * @param reservationId The ID of the reservation to find
      * @return the {@link Reservation} if found, otherwise null
      */
     @Override
-    public Reservation findReservation(String customerEmail) {
-        return reservationService.getReservation(customerEmail);
+    public Reservation findReservation(String reservationId) {
+        Reservation foundReservation = reservationService.getReservation(reservationId);
+        return foundReservation;
     }
 
     /**

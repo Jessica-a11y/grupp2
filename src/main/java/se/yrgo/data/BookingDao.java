@@ -14,7 +14,7 @@ import java.util.*;
  * </p>
  * 
  * <p>
- * Implementations of this interface are responsible for interacting woth the
+ * Implementations of this interface are responsible for interacting with the
  * underlying data source (e.g. a database).
  * </p>
  * 
@@ -66,10 +66,10 @@ public interface BookingDao {
     /**
      * Retrieves a reservation by a customers email.
      *
-     * @param customerEmail Identifier of the customer's email to find it's reservation
+     * @param reservationID the unique identifier of the reservation
      * @return the {@link Reservation} if found, otherwise {@code null}
      */
-    public Reservation findReservation(String customerEmail); 
+    public Reservation findReservation(String reservationID); 
 
     // --- Read operations (get all) ---
 

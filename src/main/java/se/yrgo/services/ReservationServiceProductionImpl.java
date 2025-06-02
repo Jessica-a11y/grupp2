@@ -55,23 +55,24 @@ public class ReservationServiceProductionImpl implements ReservationService {
      */
     @Override
     @Transactional(rollbackFor = TableNotAvailableException.class)
-    public void addReservation(Reservation reservation) throws TableNotAvailableException {
+    public Reservation addReservation(Reservation reservation) throws TableNotAvailableException {
         dao.createReservation(reservation);
+        return reservation;
     }
 
     /**
      * {@inheritDoc}
      * 
      * <p>
-     * Retrieves a reservation by a customers email from the DAO layer.
+     * Retrieves a reservation by the reservationId from the DAO layer.
      * </p>
      * 
-     * @param customerEmail Identifies the email connected to the reservation
+     * @param reservationId Identifies the reservationId connected to the reservation
      * @return the {@link Reservation} if found, otherwise {@code null}
      */
     @Override
-    public Reservation getReservation(String customerEmail) {
-        return dao.findReservation(customerEmail);
+    public Reservation getReservation(String reservationId) {
+        return dao.findReservation(reservationId);
     }
 
     /**

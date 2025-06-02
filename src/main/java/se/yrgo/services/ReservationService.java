@@ -25,15 +25,15 @@ public interface ReservationService {
      * @throws TableNotAvaliableException if no suitable table is avaliable for the
      *                                    reservation
      */
-    void addReservation(Reservation reservation) throws TableNotAvailableException;
+    Reservation addReservation(Reservation reservation) throws TableNotAvailableException;
 
     /**
-     * Retrieves a reservation by a customersEmail.
+     * Retrieves a reservation by the reservationId.
      * 
-     * @param customerEmail Identifies the email connected to the reservation
+     * @param reservationId Identifies the reservationId connected to the reservation
      * @return the {@link Reservation} if found, otherwise {@code null}
      */
-    public Reservation getReservation(String customerEmail); 
+    public Reservation getReservation(String reservationId); 
 
     /**
      * Removes a reservation with the specified ID.

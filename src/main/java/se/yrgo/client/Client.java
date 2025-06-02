@@ -117,13 +117,16 @@ public class Client {
             if (confirm.equals("confirm")) {
 
                 //Såhär
-                service.makeReservation(date, time, amountOfPeople, fullName, email, number);
-                System.out.println("Reservation confirmed! See you on " + date + " at " + time + ".");
+                /* service.makeReservation(date, time, amountOfPeople, fullName, email, number);
+                System.out.println("Reservation confirmed! See you on " + date + " at " + time + "."); */
                 
-                //Detta var det jag skrev men vi kan ta bort det 
-                //Reservaton newmadeReservation = service.makeReservation(date, time, amountOfPeople, fullName, email, number);
-                //System.out.println("Welcome to Vapiano the " + date + " at " + time);
-                //System.out.println("Your reservation ID is: " + newmadeReservation.getReservationId());
+                Reservation newReservation = service.makeReservation(date, time, amountOfPeople, fullName, email, number);
+                System.out.println("-- Reservation Confirmation - Vapiano --" + 
+                                    "\nReservation reference: "+ newReservation.getReservationId() + 
+                                    "\nName: " + newReservation.getCustomer().getName() +
+                                    "\nDate: " + date +
+                                    "\nTime: " + time);
+              
                 break;
             } else if (confirm.equals("cancel")) {
                 System.out.println("Reservation cancelled.");
@@ -161,16 +164,12 @@ public class Client {
 
     public static void find(Scanner input, BookingService service) {
         System.out.println("--- Find a Reservation ---");
-        System.out.println("Enter your email:");
-        String customerEmail = input.nextLine();
+        System.out.println("Enter your reservationID:");
+        String reservationId = input.nextLine();
 
-        Reservation result = service.findReservation(customerEmail);
-        if (result == null) {
-            System.out.println("No reservation found with that email.");
-            return;
-        }
+        Reservation result = service.findReservation(reservationId);
 
-        System.out.println("Reservation Details:\n" + result.info());
+        System.out.println("Reservation Details:\n" + result);
         System.out.println("\n[1] Change reservation\n[2] Cancel reservation");
 
         if (!input.hasNextInt()) {
